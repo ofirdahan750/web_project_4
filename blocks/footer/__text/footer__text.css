@@ -1,0 +1,9 @@
+.footer__text {
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.222222222222222;
+  color: #545454;
+}
+.footer__text::before {
+    content: "\00a9";
+  }
