@@ -1,0 +1,8 @@
+.places__like-btn::before {
+   content: url('../../../images/places/like_btn_svg/like_btn_unactive.svg');
+}
+
+.places__like-btn:hover::before {
+cursor: pointer;
+content: url('../../../images/places/like_btn_svg/like_btn_hover.svg');
+}
