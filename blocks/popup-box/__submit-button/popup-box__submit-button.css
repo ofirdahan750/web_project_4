@@ -1,0 +1,13 @@
+.popup-box__submit-button {
+background-color: #000000;
+border-radius: 2px;
+font-weight: normal;
+font-size: 18px;
+line-height: 1.222222222222222;
+text-align: center;
+color: #FFFFFF;
+padding: 13.66px 0 18.48px;
+}
+.popup-box__submit-button:hover {
+    opacity: 0.8;
+}

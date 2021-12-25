@@ -5,5 +5,5 @@
   color: #545454;
 }
 .footer__text::before {
-    content: "\00a9";
-  }
+  content: "\00a9";
+}

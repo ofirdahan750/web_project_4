@@ -1,0 +1,8 @@
+.popup-box__close-button {
+  object-fit: cover;
+  position: absolute;
+  top: -10%;
+  right: -8%;
+
+  
+}

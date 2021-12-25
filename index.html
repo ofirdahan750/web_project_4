@@ -25,35 +25,45 @@
             alt="Avatar user photo"
           />
           <div class="profile__info">
-            <h1 class="profile__name">
-              Jacques Cousteau
-              <button class="button-modifier">
-                <img
-                  src="./images/profile/profile__button-edit.png"
-                  class="profile__edit-btn"
-                />
-              </button>
-            </h1>
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button class="profile__edit-btn-cover button-modifier">
+              <img
+                src="./images/profile/profile__button-edit.png"
+                class="profile__edit-btn"
+              />
+            </button>
             <p class="profile__about-me">Explorer</p>
           </div>
-          <button class="button-modifier">
+          <button class="profile__add-btn-cover button-modifier">
             <img
               src="./images/profile/profile__button-plus.png"
               class="profile__add-btn"
             />
           </button>
+
         </section>
+        
         <section class="places">
           <ul class="place__grid-container"></ul>
         </section>
-        <section class="popup-box">
-          ss
-        </section>
       </main>
       <footer class="footer">
-        <p class="footer__text"> 2021 Around The U.S.</p>
+        <p class="footer__text">2021 Around The U.S.</p>
       </footer>
     </div>
+    <section class="popup-box">
+      <button class="button-modifier">
+      <img class="popup-box__close-button" src="./images/popup-box/Close-Icon.png" alt="">
+    </button>
+        <div class="popup-box__container">
+        <h2 class="popup-box__heading">Edit profile</h2>
+        <form class="popbox-box__form"">
+          <input class="popbox-box__input popbox-box__input_name" name="name" type="text"/>
+          <input class="popbox-box__input popbox-box__input_about-me" name="about_me" type="text"/>
+          <button class="popup-box__submit-button button-modifier" type="submit">Save</button>
+        </form>
+      </div>
+    </section>
     <script src="script.js"></script>
   </body>
 </html>

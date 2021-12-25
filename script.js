@@ -1,5 +1,17 @@
 const elBody = document.querySelector(".page");
+const elRoot = document.querySelector(".root");
+const elPopupBoxCloseBtn = document.querySelector(".popup-box__close-button");
+const elProfileEditBtn = document.querySelector(".profile__edit-btn");
 const elPlacesGridContainer = document.querySelector(".place__grid-container");
+const elPopupBox = document.querySelector(".popup-box");
+const elAboutMe = document.querySelector(".profile__about-me");
+const elProfileName = document.querySelector(".profile__name");
+const elInputName = document.querySelector('input[name="name"]');
+const elSubmitForm = document.querySelector(".popbox-box__form");
+const elInputAboutMe = document.querySelector('input[name="about_me"]');
+
+let isPopUpOpen;
+
 const itemArray = [
   {
     name: "Yosemite Valley",
@@ -23,11 +35,13 @@ const itemArray = [
   },
   {
     name: "Lago di Braies",
-    isLiked: true,
+    isLiked: false,
   },
 ];
 function onInit() {
+  isPopUpOpen = false;
   elPlacesGridContainer.insertAdjacentHTML("afterbegin", renderGrid());
+  togglePopUpopen(true);
 }
 
 function renderGrid() {
@@ -54,4 +68,35 @@ function renderGrid() {
   }
   return txtHtml;
 }
-elBody.addEventListener("load", onInit());
+function togglePopUpopen(isInit) {
+  if (!isInit) isPopUpOpen = !isPopUpOpen;
+  if (!isPopUpOpen) {
+    elPopupBox.style.display = "none";
+    elInputName.value = "";
+    elInputAboutMe.value = "";
+    elRoot.style.opacity = 1;
+  } else {
+    elPopupBox.style.display = "flex";
+    elInputName.value = elProfileName.textContent;
+    elInputAboutMe.value = elAboutMe.textContent;
+    elRoot.style.opacity = 0.5;
+  }
+}
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  elProfileName.textContent = elInputName.value;
+  elAboutMe.textContent = elInputAboutMe.value;
+  togglePopUpopen();
+}
+
+elBody.addEventListener = addEventListener("load", function () {
+  onInit();
+});
+elProfileEditBtn.addEventListener("click", function () {
+  togglePopUpopen();
+});
+elPopupBoxCloseBtn.addEventListener("click", function () {
+  togglePopUpopen();
+});
+elSubmitForm.addEventListener("submit", handleProfileFormSubmit);
