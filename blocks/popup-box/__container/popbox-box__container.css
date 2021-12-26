@@ -1,4 +1,9 @@
 .popup-box__container {
-  min-width: 360px;
+  min-width: calc(100% - (36px * 2));
   margin:0 auto;
+}
+@media screen and (max-width: 461px) {
+  .popup-box__container{
+    min-width: calc(100% - (22px * 2));
+  }
 }

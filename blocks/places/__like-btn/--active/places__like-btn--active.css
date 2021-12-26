@@ -3,5 +3,5 @@
 }
 .places__like-btn--active:hover::before {
   cursor: pointer;
-  content: url('../../../../images/places/like_btn_svg/like_btn_hover.svg');
-  }
+  content: url("../../../../images/places/like_btn_svg/like_btn_hover.svg");
+}

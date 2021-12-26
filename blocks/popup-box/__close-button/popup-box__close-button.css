@@ -1,8 +1,20 @@
+
 .popup-box__close-button {
   object-fit: cover;
   position: absolute;
-  top: -10%;
-  right: -8%;
-
-  
+  top: -11%;
+  right: -9%;
+  width: 40px;
+  height: auto;
+}
+@media screen and (max-width: 761px) {
+  .popup-box__close-button {
+    width: 26px;
+    height: auto;
+    top: -15%;
+    right: 0%;
+  }
+}
+.popup-box__close-button:hover {
+  opacity: 0.6;
 }

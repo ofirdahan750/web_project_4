@@ -1,5 +1,14 @@
 .popbox-box__form {
     display: flex;
     flex-direction: column;
-    margin: 54px 0 36.51px;
+    margin: 54px 0 48px;
 }
+@media screen and (max-width: 461px) {
+    .popbox-box__form {
+      font-weight: 900;
+      font-size: 1.125rem;
+      line-height: 1.22222222;
+      margin: 76px 0 46px;
+
+    }
+  }

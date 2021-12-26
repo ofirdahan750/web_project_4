@@ -11,3 +11,9 @@ padding: 13.66px 0 18.48px;
 .popup-box__submit-button:hover {
     opacity: 0.8;
 }
+@media screen and (max-width: 461px) {
+    .popup-box__submit-button {
+        line-height: 1.214285714285714;
+        padding: 14px 100px;
+    }
+  }
