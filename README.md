@@ -15,7 +15,7 @@
 
 ## Intro
 
-This project was prepared as part of a 100-Practicum Full-Stack course.
+This project was prepared as part of a Practicum-100 Full-Stack course.
 The project combines Html, Css and Vanilla JS.
 
 ## Description
