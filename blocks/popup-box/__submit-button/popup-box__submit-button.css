@@ -10,6 +10,7 @@
 }
 .popup-box__submit-button:hover {
   opacity: 0.8;
+  animation: slow-opacity-submit 0.25s linear forwards;
 }
 @media screen and (max-width: 461px) {
   .popup-box__submit-button {

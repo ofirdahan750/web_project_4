@@ -1,4 +1,4 @@
-.popbox-box__input {
+.popup-box__input {
   border: unset;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0 0 12.26px;
@@ -7,7 +7,7 @@
   line-height: 1.214285714285714;
 }
 @media screen and (max-width: 461px) {
-  .popbox-box__input {
+  .popup-box__input {
     padding: 0 0 8px;
   }
 }

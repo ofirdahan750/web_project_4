@@ -33,6 +33,7 @@
               <img
                 src="./images/profile/profile__button-edit.svg"
                 class="profile__edit-btn"
+                alt="Edit profile button"
               />
             </button>
             <p class="profile__about-me">Explorer</p>
@@ -41,12 +42,98 @@
             <img
               src="./images/profile/profile__button-plus.svg"
               class="profile__add-btn"
+              alt="Edit profile button"
             />
           </button>
         </section>
 
         <section class="places">
-          <ul class="place__grid-container"></ul>
+          <ul class="place__grid-container">
+            <li class="places__item">
+              <img
+                class="places__img"
+                src="./images/places/places_img/Yosemite_Valley.png"
+                alt="a photo of Yosemite Valley"
+              />
+              <div class="places__info-wrapper">
+                <h2 class="places__name">Yosemite Valley</h2>
+                <button
+                  type="button"
+                  class="places__like-btn button-modifier"
+                ></button>
+              </div>
+            </li>
+            <li class="places__item">
+              <img
+                class="places__img"
+                src="./images/places/places_img/Lake_Louise.png"
+                alt="a photo of Lake Louise"
+              />
+              <div class="places__info-wrapper">
+                <h2 class="places__name">Lake Louise</h2>
+                <button
+                  type="button"
+                  class="places__like-btn button-modifier"
+                ></button>
+              </div>
+            </li>
+            <li class="places__item">
+              <img
+                class="places__img"
+                src="./images/places/places_img/Bald_Mountains.png"
+                alt="a photo of Bald Mountains"
+              />
+              <div class="places__info-wrapper">
+                <h2 class="places__name">Bald Mountains</h2>
+                <button
+                  type="button"
+                  class="places__like-btn button-modifier"
+                ></button>
+              </div>
+            </li>
+            <li class="places__item">
+              <img
+                class="places__img"
+                src="./images/places/places_img/Latemar.png"
+                alt="a photo of Latemar"
+              />
+              <div class="places__info-wrapper">
+                <h2 class="places__name">Latemar</h2>
+                <button
+                  type="button"
+                  class="places__like-btn button-modifier"
+                ></button>
+              </div>
+            </li>
+            <li class="places__item">
+              <img
+                class="places__img"
+                src="./images/places/places_img/Vanoise_National_Park.png"
+                alt="a photo of Vanoise National Park"
+              />
+              <div class="places__info-wrapper">
+                <h2 class="places__name">Vanoise National Park</h2>
+                <button
+                  type="button"
+                  class="places__like-btn button-modifier"
+                ></button>
+              </div>
+            </li>
+            <li class="places__item">
+              <img
+                class="places__img"
+                src="./images/places/places_img/Lago_di_Braies.png"
+                alt="a photo of Lago di Braies"
+              />
+              <div class="places__info-wrapper">
+                <h2 class="places__name">Lago di Braies</h2>
+                <button
+                  type="button"
+                  class="places__like-btn button-modifier"
+                ></button>
+              </div>
+            </li>
+          </ul>
         </section>
       </main>
       <footer class="footer">
@@ -61,14 +148,14 @@
         ></button>
         <div class="popup-box__wrapper">
           <h2 class="popup-box__heading">Edit profile</h2>
-          <form name="popbox-box_form" class="popbox-box__form">
+          <form name="popup-box_form" class="popup-box__form">
             <input
-              class="popbox-box__input popbox-box__input_name"
+              class="popup-box__input popup-box__input_type_name"
               name="name"
               type="text"
             />
             <input
-              class="popbox-box__input popbox-box__input_about-me"
+              class="popup-box__input popup-box__input_type_about-me"
               name="about_me"
               type="text"
             />

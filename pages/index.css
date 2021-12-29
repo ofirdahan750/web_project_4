@@ -4,6 +4,9 @@
 /* Font Rule */
 @import url("../fonts/inter/inter.css");
 
+/* Keyframe */
+@import url("../keyframe/keyframe.css");
+
 /* Page */
 @import url("../blocks/page/page.css");
 
@@ -53,8 +56,8 @@
 @import url("../blocks/popup-box/__heading/popup-box__heading.css");
 @import url("../blocks/popup-box/__form/popup-box__form.css");
 @import url("../blocks/popup-box/__input/popup-box__input.css");
-@import url("../blocks/popup-box/__input/_name/popup-box__input_name.css");
-@import url("../blocks/popup-box/__input/_about-me/popup-box__input_about-me.css");
+@import url("../blocks/popup-box/__input/_type/_name/popup-box__input_type_name.css");
+@import url("../blocks/popup-box/__input/_type/_about-me/popup-box__input_about-me.css");
 @import url("../blocks/popup-box/__submit-button/popup-box__submit-button.css");
 
 /* footer */

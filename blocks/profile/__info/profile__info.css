@@ -4,7 +4,6 @@
   align-items: baseline;
   gap: 16px 0px;
   grid-auto-flow: column;
-
 }
 @media screen and (max-width: 900px) {
   .profile__info {

@@ -3,6 +3,7 @@
 }
 
 .places__like-btn:hover::before {
+  animation: mover 0.2s linear forwards;
   cursor: pointer;
   content: url("../../../images/places/like_btn_svg/like_btn_hover.svg");
 }
