@@ -1,14 +1,13 @@
 .popbox-box__input {
   border: unset;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0 0 13.26px;
+  padding: 0 0 12.26px;
   font-weight: normal;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.214285714285714;
 }
 @media screen and (max-width: 461px) {
   .popbox-box__input {
-    padding: 0 0 9px;
-
+    padding: 0 0 8px;
   }
 }

@@ -1,8 +1,8 @@
-/* Font Rule */
-@import url("../fonts/inter/inter.css");
-
 /* Vendor */
 @import url("../vendor/normalize.css");
+
+/* Font Rule */
+@import url("../fonts/inter/inter.css");
 
 /* Page */
 @import url("../blocks/page/page.css");
@@ -12,6 +12,12 @@
 
 /* button modifier */
 @import url("../blocks/button-modifier/button-modifier.css");
+
+/* shown flex modifier */
+@import url("../blocks/shown-flex-modifier/shown-flex-modifier.css");
+
+/* hidden modifier */
+@import url("../blocks/hidden-modifier/hidden-modifier.css");
 
 /* Header */
 @import url("../blocks/header/header.css");
@@ -37,17 +43,18 @@
 @import url("../blocks/places/__info-wrapper/places__info-wrapper.css");
 @import url("../blocks/places/__name/places__name.css");
 @import url("../blocks/places/__like-btn/places__like-btn.css");
-@import url("../blocks/places/__like-btn/--active/places__like-btn--active.css");
+@import url("../blocks/places/__like-btn/__active/places__like-btn__active.css");
 
 /* popup box */
-@import url("../blocks/popup-box/popbox-box.css");
+@import url("../blocks/popup-box/popup-box.css");
+@import url("../blocks/popup-box/__container/popup-box__container.css");
 @import url("../blocks/popup-box/__close-button/popup-box__close-button.css");
-@import url("../blocks/popup-box/__container/popbox-box__container.css");
+@import url("../blocks/popup-box/__wrapper/popup-box__wrapper.css");
 @import url("../blocks/popup-box/__heading/popup-box__heading.css");
-@import url("../blocks/popup-box/__form/popbox-box__form.css");
-@import url("../blocks/popup-box/__input/popbox-box__input.css");
-@import url("../blocks/popup-box/__input/_name/popbox-box__input_name.css");
-@import url("../blocks/popup-box/__input/_about-me/popbox-box__input_about-me.css");
+@import url("../blocks/popup-box/__form/popup-box__form.css");
+@import url("../blocks/popup-box/__input/popup-box__input.css");
+@import url("../blocks/popup-box/__input/_name/popup-box__input_name.css");
+@import url("../blocks/popup-box/__input/_about-me/popup-box__input_about-me.css");
 @import url("../blocks/popup-box/__submit-button/popup-box__submit-button.css");
 
 /* footer */

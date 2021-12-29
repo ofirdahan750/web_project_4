@@ -49,7 +49,7 @@ function renderGrid() {
 
   for (let i = 0; i < itemArray.length; i++) {
     const { isLiked, name } = itemArray[i];
-    const likedBtnStatus = isLiked ? "--active" : "";
+    const likedBtnStatus = isLiked ? "__active" : "";
     txtHtml += `
     <li class="places__item">
               <img
@@ -58,9 +58,9 @@ function renderGrid() {
                 alt="a photo of ${name}"
               />
               <div class="places__info-wrapper">
-                <p class="places__name">${name}</p>
-                <div
-                  class="places__like-btn${likedBtnStatus}"
+                <h2 class="places__name">${name}</h2>
+                <button type="button"
+                  class="places__like-btn${likedBtnStatus} button-modifier"
                 /></div>
               </div>
             </li>
@@ -71,15 +71,16 @@ function renderGrid() {
 function togglePopUpopen(isInit) {
   if (!isInit) isPopUpOpen = !isPopUpOpen;
   if (!isPopUpOpen) {
-    elPopupBox.style.display = "none";
+    // elPopupBox.style.display = "none";
+    elPopupBox.classList.remove('shown-flex-modifier')
+    elPopupBox.classList.add('hidden-modifier')
     elInputName.value = "";
     elInputAboutMe.value = "";
-    elRoot.style.opacity = 1;
   } else {
-    elPopupBox.style.display = "flex";
+    elPopupBox.classList.remove('hidden-modifier')
+    elPopupBox.classList.add('shown-flex-modifier')
     elInputName.value = elProfileName.textContent;
     elInputAboutMe.value = elAboutMe.textContent;
-    elRoot.style.opacity = 0.5;
   }
 }
 

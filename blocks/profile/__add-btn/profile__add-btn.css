@@ -6,7 +6,7 @@ border-radius: 2px;
 }
 @media screen and (max-width: 768px) {
   .profile__add-btn {
-    padding: 17px 133px;
+    padding: 17px 128px;
   }
 }
 .profile__add-btn:hover {

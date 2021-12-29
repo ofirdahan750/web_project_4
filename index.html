@@ -13,7 +13,7 @@
       <header class="header">
         <img
           class="header__logo"
-          src="./images/header/header_logo.png"
+          src="./images/header/header__logo.svg"
           alt="header logo with text `Around The U.S.`"
         />
       </header>
@@ -26,23 +26,25 @@
           />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="profile__edit-btn-cover button-modifier">
+            <button
+              type="button"
+              class="profile__edit-btn-cover button-modifier"
+            >
               <img
-                src="./images/profile/profile__button-edit.png"
+                src="./images/profile/profile__button-edit.svg"
                 class="profile__edit-btn"
               />
             </button>
             <p class="profile__about-me">Explorer</p>
           </div>
-          <button class="profile__add-btn-cover button-modifier">
+          <button type="button" class="profile__add-btn-cover button-modifier">
             <img
-              src="./images/profile/profile__button-plus.png"
+              src="./images/profile/profile__button-plus.svg"
               class="profile__add-btn"
             />
           </button>
-
         </section>
-        
+
         <section class="places">
           <ul class="place__grid-container"></ul>
         </section>
@@ -52,16 +54,32 @@
       </footer>
     </div>
     <section class="popup-box">
-      <button class="button-modifier">
-      <img src="./images/popup-box/Close-Icon.png" class="popup-box__close-button">
-    </button>
-        <div class="popup-box__container">
-        <h2 class="popup-box__heading">Edit profile</h2>
-        <form class="popbox-box__form"">
-          <input class="popbox-box__input popbox-box__input_name" name="name" type="text"/>
-          <input class="popbox-box__input popbox-box__input_about-me" name="about_me" type="text"/>
-          <button class="popup-box__submit-button button-modifier" type="submit">Save</button>
-        </form>
+      <div class="popup-box__container">
+        <button
+          type="button"
+          class="popup-box__close-button button-modifier"
+        ></button>
+        <div class="popup-box__wrapper">
+          <h2 class="popup-box__heading">Edit profile</h2>
+          <form name="popbox-box_form" class="popbox-box__form">
+            <input
+              class="popbox-box__input popbox-box__input_name"
+              name="name"
+              type="text"
+            />
+            <input
+              class="popbox-box__input popbox-box__input_about-me"
+              name="about_me"
+              type="text"
+            />
+            <button
+              class="popup-box__submit-button button-modifier"
+              type="submit"
+            >
+              Save
+            </button>
+          </form>
+        </div>
       </div>
     </section>
     <script src="script.js"></script>
