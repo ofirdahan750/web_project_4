@@ -23,4 +23,5 @@
 }
 .popup-box__close-button:hover {
   opacity: 0.6;
+  animation: slow-opacity-close 0.15s linear forwards;
 }

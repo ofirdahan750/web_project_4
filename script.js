@@ -5,20 +5,19 @@ const elPopupBox = document.querySelector(".popup-box");
 const elAboutMe = document.querySelector(".profile__about-me");
 const elProfileName = document.querySelector(".profile__name");
 const elInputName = document.querySelector('input[name="name"]');
-const elSubmitForm = document.querySelector(".popbox-box__form");
+const elSubmitForm = document.querySelector('form[name="popup-box_form"]');
 const elInputAboutMe = document.querySelector('input[name="about_me"]');
 
 let isPopUpOpen;
 
 function onInit() {
   isPopUpOpen = false;
-  togglePopUpopen(true);
+  onTogglePopUpopen(true);
 }
 
-function togglePopUpopen(isInit) {
+function onTogglePopUpopen(isInit) {
   if (!isInit) isPopUpOpen = !isPopUpOpen;
   if (!isPopUpOpen) {
-    // elPopupBox.style.display = "none";
     elPopupBox.classList.remove("shown-flex-modifier");
     elPopupBox.classList.add("hidden-modifier");
     elInputName.value = "";
@@ -31,20 +30,23 @@ function togglePopUpopen(isInit) {
   }
 }
 
-function handleProfileFormSubmit(evt) {
+function onHandleProfileFormSubmit(evt) {
   evt.preventDefault();
   elProfileName.textContent = elInputName.value;
   elAboutMe.textContent = elInputAboutMe.value;
-  togglePopUpopen();
+  onTogglePopUpopen();
 }
 
 elBody.addEventListener = addEventListener("load", function () {
   onInit();
 });
+
 elProfileEditBtn.addEventListener("click", function () {
-  togglePopUpopen();
+  onTogglePopUpopen();
 });
-elPopupBoxCloseBtn.addEventListener("click", function () {
-  togglePopUpopen();
+
+elPopupBoxCloseBtn.addEventListener("click", () => {
+  onTogglePopUpopen();
 });
-elSubmitForm.addEventListener("submit", handleProfileFormSubmit);
+
+elSubmitForm.addEventListener("submit", onHandleProfileFormSubmit);
