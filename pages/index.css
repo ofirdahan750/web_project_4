@@ -16,12 +16,6 @@
 /* button modifier */
 @import url("../blocks/button-modifier/button-modifier.css");
 
-/* shown flex modifier */
-@import url("../blocks/shown-flex-modifier/shown-flex-modifier.css");
-
-/* hidden modifier */
-@import url("../blocks/hidden-modifier/hidden-modifier.css");
-
 /* Header */
 @import url("../blocks/header/header.css");
 @import url("../blocks/header/__logo/header__logo.css");
@@ -50,6 +44,7 @@
 
 /* popup box */
 @import url("../blocks/popup-box/popup-box.css");
+@import url("../blocks/popup-box/_visibility_true/popup-box_visibility_true.css");
 @import url("../blocks/popup-box/__container/popup-box__container.css");
 @import url("../blocks/popup-box/__close-button/popup-box__close-button.css");
 @import url("../blocks/popup-box/__wrapper/popup-box__wrapper.css");

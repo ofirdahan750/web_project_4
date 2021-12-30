@@ -18,13 +18,11 @@ function onInit() {
 function onTogglePopUpopen(isInit) {
   if (!isInit) isPopUpOpen = !isPopUpOpen;
   if (!isPopUpOpen) {
-    elPopupBox.classList.remove("shown-flex-modifier");
-    elPopupBox.classList.add("hidden-modifier");
+    elPopupBox.classList.remove("popup-box_visibility_true");
     elInputName.value = "";
     elInputAboutMe.value = "";
   } else {
-    elPopupBox.classList.remove("hidden-modifier");
-    elPopupBox.classList.add("shown-flex-modifier");
+    elPopupBox.classList.add("popup-box_visibility_true");
     elInputName.value = elProfileName.textContent;
     elInputAboutMe.value = elAboutMe.textContent;
   }
