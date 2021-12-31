@@ -18,11 +18,11 @@ function onInit() {
 function onTogglePopUpopen(isInit) {
   if (!isInit) isPopUpOpen = !isPopUpOpen;
   if (!isPopUpOpen) {
-    elPopupBox.classList.remove("popup-box_visibility_true");
+    elPopupBox.classList.remove("popup-box_visible");
     elInputName.value = "";
     elInputAboutMe.value = "";
   } else {
-    elPopupBox.classList.add("popup-box_visibility_true");
+    elPopupBox.classList.add("popup-box_visible");
     elInputName.value = elProfileName.textContent;
     elInputAboutMe.value = elAboutMe.textContent;
   }
