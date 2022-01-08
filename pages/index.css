@@ -36,7 +36,9 @@
 @import url("../blocks/places/places.css");
 @import url("../blocks/places/__grid-container/places__grid-container.css");
 @import url("../blocks/places/__item/places__item.css");
+@import url("../blocks/places/__img-container/places__img-container-img.css");
 @import url("../blocks/places/__img/places__img.css");
+@import url("../blocks/places/__remove-btn/places__remove-btn.css");
 @import url("../blocks/places/__info-wrapper/places__info-wrapper.css");
 @import url("../blocks/places/__name/places__name.css");
 @import url("../blocks/places/__like-btn/places__like-btn.css");

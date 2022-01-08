@@ -49,7 +49,9 @@
 
         <section class="places">
           <ul class="place__grid-container">
-            <li class="places__item">
+       
+            </ul>
+            <!-- <li class="places__item">
               <img
                 class="places__img"
                 src="./images/places/places_img/Yosemite_Valley.png"
@@ -132,7 +134,7 @@
                   class="places__like-btn button-modifier"
                 ></button>
               </div>
-            </li>
+            </li> -->
           </ul>
         </section>
       </main>
@@ -169,6 +171,23 @@
         </div>
       </div>
     </section>
+    <template id="places-item-template">
+      <li class="places__item">
+        <div class="places__img">
+          <button class="places__remove-btn button-modifier">
+            <img  src="./images/places/remove_btn_svg/trash-btn.svg"></img>
+          </button>
+        </div>
+  
+        <div class="places__info-wrapper">
+          <h2 class="places__name">Lake Louise</h2>
+          <button
+            type="button"
+            class="places__like-btn button-modifier"
+          ></button>
+        </div>
+      </li>
+    </template>
     <script src="script.js"></script>
   </body>
 </html>
