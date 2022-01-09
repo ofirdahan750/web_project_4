@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Around The U.S.</title>
+  </head>
+
+  <body class="page">
+    <div class="root">
+      <header class="header">
+        <img
+          class="header__logo"
+          src="./images/header/header__logo.svg"
+          alt="header logo with text `Around The U.S.`"
+        />
+      </header>
+      <main class="main">
+        <section class="profile">
+          <img
+            class="profile__avatar"
+            src="./images/profile/profile_avatar.jpg"
+            alt="Avatar user photo"
+          />
+          <div class="profile__info">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button
+              type="button"
+              class="profile__edit-btn-cover button-modifier"
+            >
+              <img
+                src="./images/profile/profile__button-edit.svg"
+                class="profile__edit-btn"
+                alt="Edit profile button"
+              />
+            </button>
+            <p class="profile__about-me">Explorer</p>
+          </div>
+          <button type="button" class="profile__add-btn-cover button-modifier">
+            <img
+              src="./images/profile/profile__button-plus.svg"
+              class="profile__add-btn"
+              alt="Edit profile button"
+            />
+          </button>
+        </section>
+        <section class="places">
+          <ul class="place__grid-container"></ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__text">2021 Around The U.S.</p>
+      </footer>
+    </div>
+    <section class="popup-box"></section>
+    <template id="places-item-template">
+      <li class="places__item">
+        <div class="places__img">
+          <button class="places__remove-btn button-modifier">
+            <img src="./images/places/remove_btn_svg/trash-btn.svg" />
+          </button>
+        </div>
+        <div class="places__info-wrapper">
+          <h2 class="places__name"></h2>
+          <button
+            type="button"
+            class="places__like-btn button-modifier"
+          ></button>
+        </div>
+      </li>
+    </template>
+    <template id="popup-template">
+      <div class="popup-box__container">
+        <button
+          type="button"
+          class="popup-box__close-button button-modifier"
+        ></button>
+        <div class="popup-box__wrapper">
+          <h2 class="popup-box__heading"></h2>
+          <form name="popup-box_form" class="popup-box__form">
+            <input
+              class="popup-box__input popup-box__input_order_first-input"
+              name="first-input"
+              type="text"
+            />
+            <input
+              class="popup-box__input popup-box__input_order_second-input"
+              name="second-input"
+              type="text"
+            />
+            <button
+              class="popup-box__submit-button button-modifier"
+              type="submit"
+            ></button>
+          </form>
+        </div>
+      </div>
+    </template>
+    <script src="script.js"></script>
+  </body>
+</html>

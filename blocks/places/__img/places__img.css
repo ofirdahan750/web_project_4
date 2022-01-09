@@ -1,0 +1,10 @@
+.places__img {
+  display: flex;
+  justify-content: flex-end;
+  height: 282px;
+  border-radius: 10px 10px 0px 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
