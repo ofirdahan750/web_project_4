@@ -188,7 +188,6 @@ function onTogglePopUpopen(isInit, popupType = "", item = {}) {
     elPopupBox.classList.add("popup-box_visible");
     elPopupBox.addEventListener("mousedown", (e) => {
       e.stopPropagation();
-      console.log("e.which:", e.which);
       if (
         e.target.classList.contains(`popup-box` && "popup-box_visible") &&
         e.which !== 3
