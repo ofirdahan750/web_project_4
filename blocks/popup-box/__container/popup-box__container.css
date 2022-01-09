@@ -6,6 +6,7 @@
   border-radius: 10px;
   min-width: 430px;
   color: #000000;
+  
 }
 @media screen and (max-width: 461px) {
   .popup-box__container {

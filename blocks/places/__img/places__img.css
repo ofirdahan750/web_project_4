@@ -4,6 +4,7 @@
   height: 282px;
   border-radius: 10px 10px 0px 0px;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: center;
+  cursor: pointer;
 }

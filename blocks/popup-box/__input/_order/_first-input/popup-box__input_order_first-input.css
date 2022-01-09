@@ -1,8 +1,8 @@
-.popup-box__input_type_name {
+.popup-box__input_order_first-input {
   margin: 0 0 29.74px;
 }
 @media screen and (max-width: 461px) {
-  .popup-box__input_type_name {
+  .popup-box__input_order_first-input {
     margin: 0 0 30px;
   }
 }

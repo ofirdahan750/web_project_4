@@ -50,11 +50,17 @@
 @import url("../blocks/popup-box/__container/popup-box__container.css");
 @import url("../blocks/popup-box/__close-button/popup-box__close-button.css");
 @import url("../blocks/popup-box/__wrapper/popup-box__wrapper.css");
+/* case of picture pop */
+@import url("../blocks/popup-box/__container/_type/_img/popup-box__container_type_img.css");
+@import url("../blocks/popup-box/__wrapper/_type/_img/popup-box__wrapper_type_img.css");
+@import url("../blocks/popup-box/__img/popup-box__img.css");
+@import url("../blocks/popup-box/__img-title/popup-box__img-title.css");
+/* case of input pop */
 @import url("../blocks/popup-box/__heading/popup-box__heading.css");
 @import url("../blocks/popup-box/__form/popup-box__form.css");
 @import url("../blocks/popup-box/__input/popup-box__input.css");
-@import url("../blocks/popup-box/__input/_type/_name/popup-box__input_type_name.css");
-@import url("../blocks/popup-box/__input/_type/_about-me/popup-box__input_about-me.css");
+@import url("../blocks/popup-box/__input/_order/_first-input/popup-box__input_order_first-input.css");
+@import url("../blocks/popup-box/__input/_order/_second-input/popup-box__input_order_second-input.css");
 @import url("../blocks/popup-box/__submit-button/popup-box__submit-button.css");
 
 /* footer */
