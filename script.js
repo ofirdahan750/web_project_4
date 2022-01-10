@@ -220,11 +220,4 @@ elBody.addEventListener = addEventListener("load", () => {
   });
 });
 
-// .elPopupBoxCloseBtn.addEventListener("click", (e) => {
-//   const elPopup = document.querySelectorAll('.popup-box')
-//    Array.from(elPopup).forEach(item=>{
-//      if(item.classList.contains('popup-box_visible')) {
-//        console.log(item)
-//      }
-//    })
-// });
+
