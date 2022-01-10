@@ -149,7 +149,7 @@ function onTogglePopUpopen(popupType = "", item = {}) {
         break;
       case "img":
         elPopupBox.querySelector(".popup-box__img").src = item.link;
-        elPopupBox.querySelector(".popup-box__img").alt = `a pictrue of ${item.link}`;
+        elPopupBox.querySelector(".popup-box__img").alt = `a pictrue of ${item.name}`;
         elPopupBox.querySelector(".popup-box__img-title").textContent =
           item.name;
         break;
