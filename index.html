@@ -54,11 +54,94 @@
         <p class="footer__text">2021 Around The U.S.</p>
       </footer>
     </div>
-    <section class="popup-box"></section>
+    <!-- Popup Profile Edit -->
+    <section
+      data-name="profile-edit"
+      class="popup-box popup-box_type_profile-edit"
+    >
+      <div class="popup-box__container">
+        <button
+          type="button"
+          class="popup-box__close-button button-modifier"
+          name="profile-edit"
+        ></button>
+        <div class="popup-box__wrapper">
+          <h2 class="popup-box__heading">Edit profile</h2>
+          <form name="form_profile-edit" class="popup-box__form">
+            <input
+              class="popup-box__input popup-box__input_order_first-input"
+              name="name"
+              type="text"
+              placeholder="Enter your name"
+            />
+            <input
+              class="popup-box__input popup-box__input_order_second-input"
+              name="about_me"
+              type="text"
+              placeholder="Tell as something about yourself"
+            />
+            <button
+              class="popup-box__submit-button button-modifier"
+              type="submit"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Popup Add New Item -->
+    <section data-name="add-item" class="popup-box popup-box_type_add-item">
+      <div class="popup-box__container">
+        <button
+          name="add-item"
+          type="button"
+          class="popup-box__close-button button-modifier"
+        ></button>
+        <div class="popup-box__wrapper">
+          <h2 class="popup-box__heading">New place</h2>
+          <form name="form_add-place" class="popup-box__form">
+            <input
+              class="popup-box__input popup-box__input_order_first-input"
+              name="title_place"
+              type="text"
+              placeholder="Title"
+            />
+            <input
+              class="popup-box__input popup-box__input_order_second-input"
+              name="img_link"
+              type="text"
+              placeholder="Image link"
+            />
+            <button
+              class="popup-box__submit-button button-modifier"
+              type="submit"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Popup Img -->
+    <section data-name="img" class="popup-box popup-box_type_img">
+      <div class="popup-box__container popup-box__container_type_img">
+        <button
+          name="img"
+          type="button"
+          class="popup-box__close-button popup-box__close-button_type_img button-modifier"
+        ></button>
+        <div class="popup-box__wrapper popup-box__wrapper_type_img">
+          <img class="popup-box__img" />
+          <p class="popup-box__img-title"></p>
+        </div>
+      </div>
+    </section>
+    <!-- template place -->
     <template id="places-item-template">
       <li class="places__item">
         <div class="places__img">
-          <button class="places__remove-btn button-modifier">
+          <button type="button" class="places__remove-btn button-modifier">
             <img src="./images/places/remove_btn_svg/trash-btn.svg" />
           </button>
         </div>
@@ -71,33 +154,7 @@
         </div>
       </li>
     </template>
-    <template id="popup-template">
-      <div class="popup-box__container">
-        <button
-          type="button"
-          class="popup-box__close-button button-modifier"
-        ></button>
-        <div class="popup-box__wrapper">
-          <h2 class="popup-box__heading"></h2>
-          <form name="popup-box_form" class="popup-box__form">
-            <input
-              class="popup-box__input popup-box__input_order_first-input"
-              name="first-input"
-              type="text"
-            />
-            <input
-              class="popup-box__input popup-box__input_order_second-input"
-              name="second-input"
-              type="text"
-            />
-            <button
-              class="popup-box__submit-button button-modifier"
-              type="submit"
-            ></button>
-          </form>
-        </div>
-      </div>
-    </template>
+
     <script src="script.js"></script>
   </body>
 </html>

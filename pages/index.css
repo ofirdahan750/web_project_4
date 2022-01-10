@@ -47,13 +47,16 @@
 @import url("../blocks/popup-box/popup-box.css");
 @import url("../blocks/popup-box/_visible/popup-box_visible.css");
 @import url("../blocks/popup-box/__container/popup-box__container.css");
+@import url("../blocks/popup-box/__container/_display/_none/popup-box__container_display_none.css");
 @import url("../blocks/popup-box/__close-button/popup-box__close-button.css");
 @import url("../blocks/popup-box/__wrapper/popup-box__wrapper.css");
 /* case of picture pop */
 @import url("../blocks/popup-box/__container/_type/_img/popup-box__container_type_img.css");
+@import url("../blocks/popup-box/__close-button/_type/_img/popup-box__close-button_type_img.css");
 @import url("../blocks/popup-box/__wrapper/_type/_img/popup-box__wrapper_type_img.css");
 @import url("../blocks/popup-box/__img/popup-box__img.css");
 @import url("../blocks/popup-box/__img-title/popup-box__img-title.css");
+
 /* case of input pop */
 @import url("../blocks/popup-box/__heading/popup-box__heading.css");
 @import url("../blocks/popup-box/__form/popup-box__form.css");

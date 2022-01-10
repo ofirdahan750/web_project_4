@@ -7,11 +7,22 @@ const elAboutMe = document.querySelector(".profile__about-me");
 const elProfileEditBtn = document.querySelector(".profile__edit-btn");
 const elProfileAddBtn = document.querySelector(".profile__add-btn");
 
-const elPopupBox = document.querySelector(".popup-box");
+const elPlaceGridContainer = document.querySelector(".places__grid-container");
 
-const elPlaceGridContainer = document.querySelector(".place__grid-container");
+const elPopupBoxSection = document.querySelectorAll(".popup-box");
+const elPopupBoxCloseBtn = document.querySelectorAll(
+  ".popup-box__close-button"
+);
+const elNameInput = document.querySelector('input[name="name"]');
+const elAboutMeInput = document.querySelector('input[name="about_me"]');
+const elFormProfileEdit = document.querySelector(
+  'form[name="form_profile-edit"]'
+);
 
-let isPopUpOpen = false;
+const elPlaceTitle = document.querySelector('input[name="title_place"]');
+const elImgLink = document.querySelector('input[name="img_link"]');
+const elFormAddPlace = document.querySelector('form[name="form_add-place"]');
+let isPopUpOpen = true;
 
 function makeId() {
   let text = "";
@@ -64,10 +75,8 @@ const initialCards = [
 ];
 
 function onInit() {
-  isPopUpOpen = false;
   initialCards.forEach((item) => (item.id = makeId()));
   renderPlaceItem();
-  onTogglePopUpopen(true);
 }
 function findIdx(itemId) {
   const idx = initialCards.findIndex((card) => card.id === itemId);
@@ -82,7 +91,6 @@ function onRemoveItem(e, itemId) {
   e.stopPropagation();
   const idx = findIdx(itemId);
   initialCards.splice(idx, 1);
-
   renderPlaceItem();
 }
 
@@ -98,7 +106,7 @@ function renderPlaceItem() {
     elPlaceImg.style.backgroundImage = `url(${item.link})`;
     elPlaceImg.alt = `a photo of ${item.name}`;
     elPlaceImg.addEventListener("click", () => {
-      onTogglePopUpopen(false, "img-item", item);
+      onTogglePopUpopen("img", item);
     });
     placeItemElement.querySelector(
       ".places__name"
@@ -122,112 +130,101 @@ function renderPlaceItem() {
   elPlaceGridContainer.append(...htmlStr);
 }
 
-function onCreateItem(elemTarget, elemType, elemClass) {
-  const newElme = document.createElement(elemType);
-  newElme.classList.add(elemClass);
-  elemTarget.append(newElme);
-  return newElme;
-}
-
-function onTogglePopUpopen(isInit, popupType = "", item = {}) {
-  if (!isInit) isPopUpOpen = !isPopUpOpen;
-  const popupTemplate = document.querySelector("#popup-template").content;
-  const popupElement = popupTemplate
-    .querySelector(".popup-box__container")
-    .cloneNode(true);
-  const elPopupBoxCloseBtn = popupElement.querySelector(
-    ".popup-box__close-button"
-  );
-  const elPopupWrapper = popupElement.querySelector(".popup-box__wrapper");
-  const elPopupHeading = popupElement.querySelector(".popup-box__heading");
-  const elFirstInput = popupElement.querySelector('input[name="first-input"]');
-  const elSecInput = popupElement.querySelector('input[name="second-input"]');
-  const elPopupForm = popupElement.querySelector('form[name="popup-box_form"]');
-  const elPopupFormBtn = popupElement.querySelector(
-    ".popup-box__submit-button"
+function onTogglePopUpopen(popupType = "", item = {}) {
+  isPopUpOpen = !isPopUpOpen;
+  const elPopupBox = document.querySelector(
+    `.popup-box.popup-box_type_${popupType}`
   );
   if (!isPopUpOpen) {
-    elPopupBox.classList.remove("popup-box_visible");
-    if (!isInit) document.querySelector(".popup-box__container").remove();
-  } else {
+    elPopupBox.classList.add("popup-box_visible");
     switch (popupType) {
-      case "edit_profile":
-        elPopupHeading.textContent = "Edit profile";
-        elFirstInput.value = elProfileName.textContent;
-        elSecInput.value = elAboutMe.textContent;
-        elPopupFormBtn.textContent = "Save";
-        elPopupForm.addEventListener("submit", (e) => {
-          onSubmitEditProfile(e, elFirstInput.value, elSecInput.value);
-        });
+      case "profile-edit":
+        elNameInput.value = elProfileName.textContent;
+        elAboutMeInput.value = elAboutMe.textContent;
         break;
       case "add-item":
-        elPopupHeading.textContent = "New place";
-        elFirstInput.placeholder = "Title";
-        elSecInput.placeholder = "Image link";
-        elPopupFormBtn.textContent = "Create";
-        elPopupForm.addEventListener("submit", (e) => {
-          onSubmitAddItem(e, elFirstInput.value, elSecInput.value);
+        elFormAddPlace.addEventListener("submit", (e) => {
+          onSubmitAddItem(e);
         });
         break;
-      case "img-item":
-        popupElement.classList.add("popup-box__container_type_img");
-        elPopupWrapper.classList.add("popup-box__wrapper_type_img");
-        elPopupWrapper.textContent = "";
-        const imgElem = onCreateItem(elPopupWrapper, "img", "popup-box__img");
-        imgElem.src = item.link;
-        const textElem = onCreateItem(
-          elPopupWrapper,
-          "p",
-          "popup-box__img-title"
-        );
-        textElem.textContent = item.name;
+      case "img":
+        elPopupBox.querySelector(".popup-box__img").src = item.link;
+        elPopupBox.querySelector(".popup-box__img-title").textContent =
+          item.name;
         break;
       default:
         return;
     }
-    elPopupBox.classList.add("popup-box_visible");
-    elPopupBox.addEventListener("mousedown", (e) => {
-      e.stopPropagation();
-      if (
-        e.target.classList.contains(`popup-box` && "popup-box_visible") &&
-        e.which !== 3
-      ) {
-        onTogglePopUpopen();
-      }
-    });
-    elPopupBoxCloseBtn.addEventListener("click", () => {
-      onTogglePopUpopen();
-    });
-    elPopupBox.append(popupElement);
+  } else {
+    elPopupBox.classList.remove("popup-box_visible");
+    const elPopupboxContainer = elPopupBox.querySelector(
+      ".popup-box__container"
+    );
+    elPopupboxContainer.classList.add("popup-box__container_display_none");
+    setTimeout(() => {
+      elPopupboxContainer.classList.remove("popup-box__container_display_none");
+    }, 320);
   }
 }
 
-function onSubmitEditProfile(evt, profileNameVal, profileAboutMeVal) {
+function onSubmitEditProfile(evt) {
   evt.preventDefault();
-  elProfileName.textContent = profileNameVal;
-  elAboutMe.textContent = profileAboutMeVal;
-  onTogglePopUpopen();
+  elProfileName.textContent = elNameInput.value;
+  elAboutMe.textContent = elAboutMeInput.value;
+  elNameInput.value = "";
+  elAboutMeInput.value = "";
+  onTogglePopUpopen("profile-edit");
 }
-function onSubmitAddItem(evt, itemName, itemSrc) {
+
+function onSubmitAddItem(evt) {
   evt.preventDefault();
   const newItem = {
     id: makeId(),
-    name: itemName,
-    link: itemSrc,
+    name: elPlaceTitle.value,
+    link: elImgLink.value,
     isLike: false,
   };
   initialCards.push(newItem);
-  onTogglePopUpopen();
+  onTogglePopUpopen("add-item");
   renderPlaceItem();
 }
 
 elBody.addEventListener = addEventListener("load", () => {
   onInit();
+  elProfileEditBtn.addEventListener("click", () => {
+    onTogglePopUpopen("profile-edit");
+  });
+  elProfileAddBtn.addEventListener("click", () => {
+    onTogglePopUpopen("add-item");
+  });
+  elFormProfileEdit.addEventListener("submit", (e) => {
+    onSubmitEditProfile(e);
+  });
+
+  Array.from(elPopupBoxSection).forEach((popbox) => {
+    popbox.addEventListener("mousedown", (e) => {
+      e.stopPropagation();
+      const { target, which } = e;
+      if (
+        target.classList.contains(`popup-box` && "popup-box_visible") &&
+        which !== 3
+      ) {
+        onTogglePopUpopen(target.getAttribute("data-name"));
+      }
+    });
+  });
+  Array.from(elPopupBoxCloseBtn).forEach((btnElem) => {
+    btnElem.addEventListener("click", (e) => {
+      onTogglePopUpopen(e.target.name);
+    });
+  });
 });
 
-elProfileEditBtn.addEventListener("click", () => {
-  onTogglePopUpopen(false, "edit_profile");
-});
-elProfileAddBtn.addEventListener("click", () => {
-  onTogglePopUpopen(false, "add-item");
-});
+// .elPopupBoxCloseBtn.addEventListener("click", (e) => {
+//   const elPopup = document.querySelectorAll('.popup-box')
+//    Array.from(elPopup).forEach(item=>{
+//      if(item.classList.contains('popup-box_visible')) {
+//        console.log(item)
+//      }
+//    })
+// });
