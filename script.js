@@ -123,11 +123,6 @@ function handleImgPopup(item) {
 
 function handleClosePopup(popupBox) {
   popupBox.classList.remove("popup-box_visible");
-  const popupboxContainer = popupBox.querySelector(".popup-box__container");
-  popupboxContainer.classList.add("popup-box__container_display_none");
-  setTimeout(() => {
-    popupboxContainer.classList.remove("popup-box__container_display_none");
-  }, 320);
 }
 
 function clearValueInput(...items) {

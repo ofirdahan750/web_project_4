@@ -47,7 +47,6 @@
 @import url("../blocks/popup-box/popup-box.css");
 @import url("../blocks/popup-box/_visible/popup-box_visible.css");
 @import url("../blocks/popup-box/__container/popup-box__container.css");
-@import url("../blocks/popup-box/__container/_display/_none/popup-box__container_display_none.css");
 @import url("../blocks/popup-box/__close-button/popup-box__close-button.css");
 @import url("../blocks/popup-box/__wrapper/popup-box__wrapper.css");
 /* case of picture pop */
