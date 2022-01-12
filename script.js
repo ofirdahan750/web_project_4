@@ -1,23 +1,38 @@
+//Body global element
 const body = document.querySelector(".page");
-
+//Profile global element
 const profileName = document.querySelector(".profile__name");
 const aboutMe = document.querySelector(".profile__about-me");
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
-
+//Place global element
 const placeGridContainer = document.querySelector(".places__grid-container");
-
+//Popup all global elements popup section + close button
 const popupBoxSections = document.querySelectorAll(".popup-box");
 const popupBoxCloseBtns = document.querySelectorAll(".popup-box__close-button");
-const nameInput = document.querySelector('input[name="name"]');
-const aboutMeInput = document.querySelector('input[name="about_me"]');
+// Popup edit global element
+
 const formProfileEdit = document.querySelector(
   'form[name="form_profile-edit"]'
 );
-
+const nameInput = document.querySelector('input[name="name"]');
+const aboutMeInput = document.querySelector('input[name="about_me"]');
+// popup add item to place global element
 const placeTitle = document.querySelector('input[name="title_place"]');
 const imgLink = document.querySelector('input[name="img_link"]');
 const formAddPlace = document.querySelector('form[name="form_add-place"]');
+// popup img item place global element
+
+const popupImg = document.querySelector(".popup-box__img");
+const popupImgTitle = document.querySelector(".popup-box__img-title");
+
+const popupBoxsObj = {
+  popupAddItemSection: document.querySelector(".popup-box_type_add-item"),
+  popupImgSection: document.querySelector(".popup-box_type_img"),
+  popupProfileEditSection: document.querySelector(
+    ".popup-box_type_profile-edit"
+  ),
+};
 
 const initialCards = [
   {
@@ -46,13 +61,17 @@ const initialCards = [
   },
 ];
 
-function onToggleLikedBtn(e) {
+function handleToggleLikedBtn(e) {
   e.target.classList.toggle("places__like-btn__active");
+}
+function findClosestparent(e, className) {
+  return e.currentTarget.closest(className);
 }
 function onRemoveItem(e) {
   e.stopPropagation();
-  const { parentNode } = e.currentTarget.parentNode;
-  parentNode.remove();
+  const itemToRemove = findClosestparent(e, ".places__item");
+  console.log("itemToRemove:", itemToRemove);
+  itemToRemove.remove();
 }
 function createCard(item) {
   const placeItemTemplate = document.querySelector(
@@ -65,12 +84,13 @@ function createCard(item) {
   placeImg.style.backgroundImage = `url(${item.link})`;
   placeImg.alt = `a photo of ${item.name}`;
   placeImg.addEventListener("click", () => {
-    onOpenPopup("img", item);
+    openPopup("popupImgSection");
+    handleImgPopup(item);
   });
   cardElement.querySelector(".places__name").textContent = `${item.name}`;
   const btnPlace = cardElement.querySelector(".places__like-btn");
   btnPlace.addEventListener("click", (e) => {
-    onToggleLikedBtn(e);
+    handleToggleLikedBtn(e);
   });
   cardElement
     .querySelector(".places__remove-btn")
@@ -87,31 +107,21 @@ function renderPlaceItem() {
 
   placeGridContainer.append(...htmlStr);
 }
-
-function onOpenPopup(popupType, item = {}) {
-  const popupBox = document.querySelector(
-    `.popup-box.popup-box_type_${popupType}`
-  );
-  popupBox.classList.add("popup-box_visible");
-  switch (popupType) {
-    case "profile-edit":
-      nameInput.value = profileName.textContent;
-      aboutMeInput.value = aboutMe.textContent;
-      break;
-    case "img":
-      popupBox.querySelector(".popup-box__img").src = item.link;
-      popupBox.querySelector(
-        ".popup-box__img"
-      ).alt = `a pictrue of ${item.name}`;
-      popupBox.querySelector(".popup-box__img-title").textContent = item.name;
-      break;
-    case "add-item":
-      break;
-    default:
-      return;
-  }
+function openPopup(key) {
+  popupBoxsObj[key].classList.add("popup-box_visible");
 }
-function onClosePopup(popupBox) {
+
+function handleEditProfilePopup() {
+  nameInput.value = profileName.textContent;
+  aboutMeInput.value = aboutMe.textContent;
+}
+function handleImgPopup(item) {
+  popupImg.src = item.link;
+  popupImg.alt = `a pictrue of ${item.name}`;
+  popupImgTitle.textContent = item.name;
+}
+
+function handleClosePopup(popupBox) {
   popupBox.classList.remove("popup-box_visible");
   const popupboxContainer = popupBox.querySelector(".popup-box__container");
   popupboxContainer.classList.add("popup-box__container_display_none");
@@ -124,18 +134,16 @@ function clearValueInput(...items) {
   items.forEach((item) => (item.value = ""));
 }
 
-function onSubmitEditProfile(e) {
+function handleSubmitEditProfile(e) {
   e.preventDefault();
-  const { parentNode } = e.currentTarget.parentNode.parentNode;
   profileName.textContent = nameInput.value;
   aboutMe.textContent = aboutMeInput.value;
   clearValueInput(nameInput, aboutMeInput);
-  onClosePopup(parentNode);
+  handleClosePopup(findClosestparent(e, ".popup-box_type_profile-edit"));
 }
 
-function onSubmitAddItem(e) {
+function handleSubmitAddItem(e) {
   e.preventDefault();
-  const { parentNode } = e.currentTarget.parentNode.parentNode;
   const objNewItem = {
     name: placeTitle.value,
     link: imgLink.value,
@@ -143,40 +151,36 @@ function onSubmitAddItem(e) {
   const newItem = createCard(objNewItem);
   placeGridContainer.prepend(newItem);
   clearValueInput(imgLink, placeTitle);
-  onClosePopup(parentNode);
+  handleClosePopup(findClosestparent(e, ".popup-box_type_add-item"));
 }
 
 body.addEventListener = addEventListener("load", () => {
   renderPlaceItem();
   profileEditBtn.addEventListener("click", () => {
-    onOpenPopup("profile-edit");
+    openPopup("popupProfileEditSection");
+    handleEditProfilePopup();
   });
   profileAddBtn.addEventListener("click", () => {
-    onOpenPopup("add-item");
+    openPopup("popupAddItemSection");
   });
   formProfileEdit.addEventListener("submit", (e) => {
-    onSubmitEditProfile(e);
+    handleSubmitEditProfile(e);
   });
   formAddPlace.addEventListener("submit", (e) => {
-    onSubmitAddItem(e);
+    handleSubmitAddItem(e);
   });
   popupBoxSections.forEach((popup) => {
     popup.addEventListener("mousedown", (e) => {
       e.stopPropagation();
       const { target, which } = e;
-      if (
-        target.classList.contains(`popup-box` && "popup-box_visible") &&
-        which !== 3
-      ) {
-        onClosePopup(target);
+      const { classList } = target;
+      if (which === 3) return;
+      if (classList.contains("popup-box_visible")) {
+        handleClosePopup(target);
       }
-    });
-  });
-
-  popupBoxCloseBtns.forEach((btnElem) => {
-    btnElem.addEventListener("click", (e) => {
-      const { parentNode } = e.currentTarget.parentNode;
-      onClosePopup(parentNode);
+      if (classList.contains("popup-box__close-button")) {
+        handleClosePopup(findClosestparent(e, ".popup-box"));
+      }
     });
   });
 });
