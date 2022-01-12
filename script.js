@@ -33,7 +33,7 @@ const popupBoxsObj = {
     ".popup-box_type_profile-edit"
   ),
 };
-
+const {popupAddItemSection,popupImgSection,popupProfileEditSection} = popupBoxsObj
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -64,12 +64,12 @@ const initialCards = [
 function handleToggleLikedBtn(e) {
   e.target.classList.toggle("places__like-btn__active");
 }
-function findClosestparent(e, className) {
+function findClosestParent(e, className) {
   return e.currentTarget.closest(className);
 }
 function onRemoveItem(e) {
   e.stopPropagation();
-  const itemToRemove = findClosestparent(e, ".places__item");
+  const itemToRemove = findClosestParent(e, ".places__item");
   console.log("itemToRemove:", itemToRemove);
   itemToRemove.remove();
 }
@@ -84,7 +84,7 @@ function createCard(item) {
   placeImg.style.backgroundImage = `url(${item.link})`;
   placeImg.alt = `a photo of ${item.name}`;
   placeImg.addEventListener("click", () => {
-    openPopup("popupImgSection");
+    openPopup(popupImgSection);
     handleImgPopup(item);
   });
   cardElement.querySelector(".places__name").textContent = `${item.name}`;
@@ -107,8 +107,8 @@ function renderPlaceItem() {
 
   placeGridContainer.append(...htmlStr);
 }
-function openPopup(key) {
-  popupBoxsObj[key].classList.add("popup-box_visible");
+function openPopup(popup) {
+  popup.classList.add("popup-box_visible");
 }
 
 function handleEditProfilePopup() {
@@ -134,7 +134,7 @@ function handleSubmitEditProfile(e) {
   profileName.textContent = nameInput.value;
   aboutMe.textContent = aboutMeInput.value;
   clearValueInput(nameInput, aboutMeInput);
-  handleClosePopup(findClosestparent(e, ".popup-box_type_profile-edit"));
+  handleClosePopup(popupProfileEditSection);
 }
 
 function handleSubmitAddItem(e) {
@@ -146,17 +146,17 @@ function handleSubmitAddItem(e) {
   const newItem = createCard(objNewItem);
   placeGridContainer.prepend(newItem);
   clearValueInput(imgLink, placeTitle);
-  handleClosePopup(findClosestparent(e, ".popup-box_type_add-item"));
+  handleClosePopup(popupAddItemSection);
 }
 
 body.addEventListener = addEventListener("load", () => {
   renderPlaceItem();
   profileEditBtn.addEventListener("click", () => {
-    openPopup("popupProfileEditSection");
+    openPopup(popupBoxsObj["popupProfileEditSection"]);
     handleEditProfilePopup();
   });
   profileAddBtn.addEventListener("click", () => {
-    openPopup("popupAddItemSection");
+    openPopup(popupBoxsObj["popupAddItemSection"]);
   });
   formProfileEdit.addEventListener("submit", (e) => {
     handleSubmitEditProfile(e);
@@ -167,14 +167,14 @@ body.addEventListener = addEventListener("load", () => {
   popupBoxSections.forEach((popup) => {
     popup.addEventListener("mousedown", (e) => {
       e.stopPropagation();
-      const { target, which } = e;
+      const { target, which,currentTarget } = e;
       const { classList } = target;
       if (which === 3) return;
       if (classList.contains("popup-box_visible")) {
         handleClosePopup(target);
       }
       if (classList.contains("popup-box__close-button")) {
-        handleClosePopup(findClosestparent(e, ".popup-box"));
+        handleClosePopup(currentTarget);
       }
     });
   });
