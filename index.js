@@ -33,7 +33,8 @@ const popupBoxsObj = {
     ".popup-box_type_profile-edit"
   ),
 };
-const {popupAddItemSection,popupImgSection,popupProfileEditSection} = popupBoxsObj
+const { popupAddItemSection, popupImgSection, popupProfileEditSection } =
+  popupBoxsObj;
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -70,7 +71,6 @@ function findClosestParent(e, className) {
 function onRemoveItem(e) {
   e.stopPropagation();
   const itemToRemove = findClosestParent(e, ".places__item");
-  console.log("itemToRemove:", itemToRemove);
   itemToRemove.remove();
 }
 function createCard(item) {
@@ -167,7 +167,7 @@ body.addEventListener = addEventListener("load", () => {
   popupBoxSections.forEach((popup) => {
     popup.addEventListener("mousedown", (e) => {
       e.stopPropagation();
-      const { target, which,currentTarget } = e;
+      const { target, which, currentTarget } = e;
       const { classList } = target;
       if (which === 3) return;
       if (classList.contains("popup-box_visible")) {
@@ -177,5 +177,11 @@ body.addEventListener = addEventListener("load", () => {
         handleClosePopup(currentTarget);
       }
     });
+    popup.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        handleClosePopup(e.currentTarget);
+      }
+    });
   });
 });
+

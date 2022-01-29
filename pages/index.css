@@ -59,10 +59,15 @@
 /* case of input pop */
 @import url("../blocks/popup-box/__heading/popup-box__heading.css");
 @import url("../blocks/popup-box/__form/popup-box__form.css");
+@import url("../blocks/popup-box/__fieldset/popup-box__fieldset.css");
 @import url("../blocks/popup-box/__input/popup-box__input.css");
+@import url("../blocks/popup-box/__input/_type/popup-box__input_type_error.css");
+@import url("../blocks/popup-box/__input-error/popup-box__input-error.css");
+@import url("../blocks/popup-box/__input-error/_active/popup-box__input-error.css");
 @import url("../blocks/popup-box/__input/_order/_first-input/popup-box__input_order_first-input.css");
 @import url("../blocks/popup-box/__input/_order/_second-input/popup-box__input_order_second-input.css");
 @import url("../blocks/popup-box/__submit-button/popup-box__submit-button.css");
+@import url("../blocks/popup-box/__submit-button/_inactive/popup-box__submit-button_inactive.css");
 
 /* footer */
 @import url("../blocks/footer/footer.css");

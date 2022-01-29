@@ -1,8 +1,3 @@
-.popup-box__input_order_second-input {
-  margin: 0 0 48px;
-}
-@media screen and (max-width: 461px) {
-  .popup-box__input_order_second-input {
-    margin: 0 0 46px;
-  }
-}
+/* .popup-box__input_order_second-input {
+  margin: 0 0 5px;
+} */
