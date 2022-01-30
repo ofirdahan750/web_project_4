@@ -8,21 +8,17 @@ const enableValidation = (props) => {
     errorClass,
   } = props;
   const formList = Array.from(document.querySelectorAll(formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
 
-    formList.forEach((fieldset) => {
-      setEventListeners(
-        fieldset,
-        inputSelector,
-        submitButtonSelector,
-        inactiveButtonClass,
-        inputErrorClass,
-        errorClass
-      );
-    });
+  formList.forEach((fieldset) => {
+  
+    setEventListeners(
+      fieldset,
+      inputSelector,
+      submitButtonSelector,
+      inactiveButtonClass,
+      inputErrorClass,
+      errorClass
+    );
   });
 };
 
@@ -34,6 +30,9 @@ const setEventListeners = (
   inputErrorClass,
   errorClass
 ) => {
+  formElement.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);

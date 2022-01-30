@@ -23,7 +23,7 @@ const aboutMeInput = document.querySelector('input[name="about_me"]');
 const placeTitle = document.querySelector('input[name="title_place"]');
 const imgLink = document.querySelector('input[name="img_link"]');
 const formAddPlace = document.querySelector('form[name="form_add-place"]');
-const formSubmitBtn = document.querySelector('button[name="btn_add-item"]');
+const cardFormSubmitBtn = document.querySelector('button[name="btn_add-item"]');
 // popup img item place global element
 const popupImg = document.querySelector(".popup-box__img");
 const popupImgTitle = document.querySelector(".popup-box__img-title");
@@ -111,9 +111,7 @@ function renderPlaceItem() {
 }
 function openPopup(popup) {
   popup.classList.add("popup-box_visible");
-  document.addEventListener("keydown", (e) => {
-    closeByEscape(e);
-  });
+  document.addEventListener("keydown", closeByEscape);
 }
 
 function handleEditProfilePopup() {
@@ -152,8 +150,8 @@ function handleSubmitAddItem(e) {
   const newItem = createCard(objNewItem);
   placeGridContainer.prepend(newItem);
   clearValueInput(imgLink, placeTitle);
-  formSubmitBtn.disabled = true;
-  formSubmitBtn.classList.add("popup-box__submit-button_inactive");
+  cardFormSubmitBtn.disabled = true;
+  cardFormSubmitBtn.classList.add("popup-box__submit-button_inactive");
   handleClosePopup(popupAddItemSection);
 }
 
