@@ -71,6 +71,7 @@ function handleSubmitAddItem(e) {
   cardFormSubmitBtn.disabled = true;
   cardFormSubmitBtn.classList.add("popup-box__submit-button_inactive");
   handleClosePopup(popupAddItemSection);
+  formValidators['form_add-place'].resetValidation();
 }
 export function onInit() {
   profileEditBtn.addEventListener("click", () => {
