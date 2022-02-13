@@ -1,15 +1,15 @@
-//Body global element
-const body = document.querySelector(".page");
+import { Card } from "./Card.js";
+import {formValidators} from './index.js'
 //Profile global element
 const profileName = document.querySelector(".profile__name");
 const aboutMe = document.querySelector(".profile__about-me");
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 //Place global element
-const placeGridContainer = document.querySelector(".places__grid-container");
+export const placeGridContainer = document.querySelector(".places__grid-container");
 //Popup all global elements popup section + close button
 const popupBoxSections = document.querySelectorAll(".popup-box");
-const popupBoxCloseBtns = document.querySelectorAll(".popup-box__close-button");
+// const popupBoxCloseBtns = document.querySelectorAll(".popup-box__close-button");
 // Popup edit global element
 
 const formProfileEdit = document.querySelector(
@@ -25,8 +25,6 @@ const imgLink = document.querySelector('input[name="img_link"]');
 const formAddPlace = document.querySelector('form[name="form_add-place"]');
 const cardFormSubmitBtn = document.querySelector('button[name="btn_add-item"]');
 // popup img item place global element
-const popupImg = document.querySelector(".popup-box__img");
-const popupImgTitle = document.querySelector(".popup-box__img-title");
 
 const popupBoxsObj = {
   popupAddItemSection: document.querySelector(".popup-box_type_add-item"),
@@ -35,93 +33,12 @@ const popupBoxsObj = {
     ".popup-box_type_profile-edit"
   ),
 };
-const { popupAddItemSection, popupImgSection, popupProfileEditSection } =
+export const { popupAddItemSection, popupImgSection, popupProfileEditSection } =
   popupBoxsObj;
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
-
-function handleToggleLikedBtn(e) {
-  e.target.classList.toggle("places__like-btn__active");
-}
-function findClosestParent(e, className) {
-  return e.currentTarget.closest(className);
-}
-function onRemoveItem(e) {
-  e.stopPropagation();
-  const itemToRemove = findClosestParent(e, ".places__item");
-  itemToRemove.remove();
-}
-function createCard(item) {
-  const placeItemTemplate = document.querySelector(
-    "#places-item-template"
-  ).content;
-  const cardElement = placeItemTemplate
-    .querySelector(".places__item")
-    .cloneNode(true);
-  const placeImg = cardElement.querySelector(".places__img");
-  placeImg.style.backgroundImage = `url(${item.link})`;
-  placeImg.alt = `a photo of ${item.name}`;
-  placeImg.addEventListener("click", () => {
-    openPopup(popupImgSection);
-    handleImgPopup(item);
-  });
-  cardElement.querySelector(".places__name").textContent = `${item.name}`;
-  const btnPlace = cardElement.querySelector(".places__like-btn");
-  btnPlace.addEventListener("click", (e) => {
-    handleToggleLikedBtn(e);
-  });
-  cardElement
-    .querySelector(".places__remove-btn")
-    .addEventListener("click", (e) => {
-      onRemoveItem(e);
-    });
-  return cardElement;
-}
-function renderPlaceItem() {
-  const htmlStr = initialCards.map((card) => {
-    const placeItemElement = createCard(card);
-    return placeItemElement;
-  });
-
-  placeGridContainer.append(...htmlStr);
-}
-function openPopup(popup) {
-  popup.classList.add("popup-box_visible");
-  document.addEventListener("keydown", closeByEscape);
-}
 
 function handleEditProfilePopup() {
   nameInput.value = profileName.textContent;
   aboutMeInput.value = aboutMe.textContent;
-}
-function handleImgPopup(item) {
-  popupImg.src = item.link;
-  popupImg.alt = `a pictrue of ${item.name}`;
-  popupImgTitle.textContent = item.name;
 }
 
 function handleClosePopup(popupBox) {
@@ -139,6 +56,7 @@ function handleSubmitEditProfile(e) {
   aboutMe.textContent = aboutMeInput.value;
   clearValueInput(nameInput, aboutMeInput);
   handleClosePopup(popupProfileEditSection);
+  formValidators['form_profile-edit'].resetValidation();
 }
 
 function handleSubmitAddItem(e) {
@@ -147,22 +65,20 @@ function handleSubmitAddItem(e) {
     name: placeTitle.value,
     link: imgLink.value,
   };
-  const newItem = createCard(objNewItem);
-  placeGridContainer.prepend(newItem);
+  const newItem = new Card(objNewItem);
+  placeGridContainer.prepend(newItem.generateCard());
   clearValueInput(imgLink, placeTitle);
   cardFormSubmitBtn.disabled = true;
   cardFormSubmitBtn.classList.add("popup-box__submit-button_inactive");
   handleClosePopup(popupAddItemSection);
 }
-
-body.addEventListener = addEventListener("load", () => {
-  renderPlaceItem();
+export function onInit() {
   profileEditBtn.addEventListener("click", () => {
-    openPopup(popupBoxsObj["popupProfileEditSection"]);
+    openPopup(popupProfileEditSection);
     handleEditProfilePopup();
   });
   profileAddBtn.addEventListener("click", () => {
-    openPopup(popupBoxsObj["popupAddItemSection"]);
+    openPopup(popupAddItemSection);
   });
   formProfileEdit.addEventListener("submit", (e) => {
     handleSubmitEditProfile(e);
@@ -184,11 +100,15 @@ body.addEventListener = addEventListener("load", () => {
       }
     });
   });
-});
-
+}
 function closeByEscape(e) {
   if (e.key === "Escape") {
     const openedPopup = document.querySelector(".popup-box_visible");
     handleClosePopup(openedPopup);
   }
 }
+export function openPopup(popup) {
+  popup.classList.add("popup-box_visible");
+  document.addEventListener("keydown", closeByEscape);
+}
+
