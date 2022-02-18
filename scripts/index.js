@@ -2,7 +2,7 @@ import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 
 import { initialCards } from "../data/initialCards.js";
-import { handleClosePopup, openPopup } from "./utils.js";
+import { closePopup, openPopup } from "./utils.js";
 const formValidators = {};
 
 const profileName = document.querySelector(".profile__name");
@@ -60,7 +60,7 @@ function handleSubmitAddItem(e) {
   };
   const newItem = new Card(objNewItem, "#places-item-template");
   placeGridContainer.prepend(newItem.generateCard());
-  handleClosePopup(popupAddItemSection);
+  closePopup(popupAddItemSection);
   formValidators["form_add-place"].resetValidation();
 }
 
@@ -72,7 +72,7 @@ function handleSubmitEditProfile(e) {
   e.preventDefault();
   profileName.textContent = nameInput.value;
   aboutMe.textContent = aboutMeInput.value;
-  handleClosePopup(popupProfileEditSection);
+  closePopup(popupProfileEditSection);
   formValidators["form_profile-edit"].resetValidation();
 }
 
@@ -106,12 +106,17 @@ function onInit() {
       e.stopPropagation();
       const { target, currentTarget } = e;
       const { classList } = target;
-      if (classList.contains("popup-box__wrapper") || e.button === 2) return;
+      const contextMenuCode = 2;
+      if (
+        classList.contains("popup-box__wrapper") ||
+        e.button === contextMenuCode
+      )
+        return;
       if (target.closest(".popup-box_visible")) {
-        handleClosePopup(target);
+        closePopup(target);
       }
       if (target.closest(".popup-box__close-button")) {
-        handleClosePopup(currentTarget);
+        closePopup(currentTarget);
       }
     });
     popup.addEventListener("contextmenu", (e) => {

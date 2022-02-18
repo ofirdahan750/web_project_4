@@ -22,7 +22,7 @@ export class Card {
   }
   _handleToggleLikedBtn(e) {
     e.stopPropagation();
-    this.classList.toggle("places__like-btn__active");
+    this._placeLikeBtn.classList.toggle("places__like-btn__active");
   }
   _handleRemoveItem(e) {
     e.stopPropagation();
@@ -38,9 +38,9 @@ export class Card {
     this._placeImg.addEventListener("click", () => {
       openPopup(popupImgSection);
     });
-    this._cardItem
-      .querySelector(".places__like-btn")
-      .addEventListener("click", this._handleToggleLikedBtn);
+    this._placeLikeBtn.addEventListener("click", (e) => {
+      this._handleToggleLikedBtn(e);
+    });
     this._cardItem
       .querySelector(".places__remove-btn")
       .addEventListener("click", (e) => {
@@ -51,8 +51,9 @@ export class Card {
   generateCard() {
     this._cardItem = this._getTemplate();
     this._placeImg = this._cardItem.querySelector(".places__img");
+    this._placeLikeBtn = this._cardItem.querySelector(".places__like-btn");
     this._setEventListeners();
-    this._placeImg.style.backgroundImage = `url(${this._link})`; //This line is refers to the Place item img and not the popup!The function that's changes the popup is _handleImgPopup()
+    this._placeImg.style.backgroundImage = `url(${this._link})`;
     this._placeImg.alt = `a photo of ${this._name}`;
     this._cardItem.querySelector(".places__name").textContent = `${this._name}`;
     return this._cardItem;
