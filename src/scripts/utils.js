@@ -7,6 +7,7 @@ function closeByEscape(e) {
   if (e.key === "Escape") {
     const openedPopup = document.querySelector(".popup-box_visible");
     closePopup(openedPopup);
+    console.log('wow')
   }
 }
 function openPopup(popup) {

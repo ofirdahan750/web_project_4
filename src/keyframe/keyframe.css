@@ -1,7 +1,7 @@
 @keyframes pulsate-bck {
   0% {
     transform: scale(1.2);
-    content: url("../../../images/places/like_btn_svg/like_btn_hover.svg");
+    content: url("../images/places/like_btn_svg/like_btn_hover.svg");
   }
   50% {
     transform: scale(0.9);
