@@ -1,14 +1,15 @@
 export default class Popup {
-  constructor(popupElm) {
-    this._popupElm = document.querySelector(popupElm);
+  constructor(popupSelector) {
+    this._popupElement = document.querySelector(popupSelector);
   }
 
   _handleContextMenu = (e) => {
     e.preventDefault();
   };
   _handleMouseClose = (e) => {
-    const { target } = e;
-    const { classList } = target;
+    const {
+      target: { classList },
+    } = e;
     const contextMenuCode = 2;
     if (
       classList.contains("popup-box__wrapper") ||
@@ -21,6 +22,7 @@ export default class Popup {
     ) {
       this.close();
     }
+    this._popupElement.removeEventListener("click", this._handleMouseClose);
   };
   _handleEscClose = (e) => {
     if (e.key == "Escape") {
@@ -28,23 +30,18 @@ export default class Popup {
     }
   };
   open() {
-    this._popupElm.classList.add("popup-box_visible");
-    this.setEventListeners();
+    this._popupElement.classList.add("popup-box_visible");
   }
 
   close() {
-    this._popupElm.classList.remove("popup-box_visible");
+    this._popupElement.classList.remove("popup-box_visible");
     this.removeEventListeners();
   }
   removeEventListeners() {
-    this._popupElm.removeEventListener("click", this._handleMouseClose);
-    document.removeEventListener("contextmenu", this._handleContextMenu);
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
   setEventListeners() {
-    this._popupElm.addEventListener("mousedown", this._handleMouseClose);
-    document.addEventListener("contextmenu", this._handleContextMenu);
     document.addEventListener("keydown", this._handleEscClose);
   }
 }

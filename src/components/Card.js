@@ -1,10 +1,10 @@
 
 export class Card {
-  constructor(data, openImgPopup, cardSelector) {
+  constructor(data, handleImageClick, cardSelector) {
     const { name, link } = data;
     this._name = name;
     this._link = link;
-    this._openImgPopup = openImgPopup;
+    this._handleImageClick = handleImageClick;
     this._cardSelector = cardSelector;
   }
   _getTemplate() {
@@ -24,11 +24,12 @@ export class Card {
   _handleRemoveItem(e) {
     e.stopPropagation();
     this._cardItem.remove();
+    this._cardItem = null; 
   }
 
   _setEventListeners() {
     this._cardItem.addEventListener("click", () => {
-      this._openImgPopup(this._name, this._link);
+      this._handleImageClick(this._name, this._link);
     });
     this._placeLikeBtn.addEventListener("click", (e) => {
       this._handleToggleLikedBtn(e);

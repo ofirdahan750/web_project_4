@@ -26,19 +26,17 @@ const initialCards = [
 ];
 const formValidators = {};
 
-const profileEditBtn = document.querySelector(".profile__edit-btn");
-const profileAddBtn = document.querySelector(".profile__add-btn");
+const openEditUserPopupBtn = document.querySelector(".profile__edit-btn");
+const openAddPlacesPopupBtn = document.querySelector(".profile__add-btn");
 
 const nameInput = document.querySelector('input[name="name_input"]');
 const aboutMeInput = document.querySelector('input[name="about_me"]');
 
-const cardFormSubmitBtn = document.querySelector('button[name="btn_add-item"]');
 export {
-  cardFormSubmitBtn,
   aboutMeInput,
   nameInput,
   initialCards,
-  profileEditBtn,
+  openEditUserPopupBtn,
+  openAddPlacesPopupBtn,
   formValidators,
-  profileAddBtn,
 };
