@@ -13,7 +13,6 @@
         <img
           class="header__logo"
           src="<%= require('./images/header/header__logo.svg')%>"
-
           alt="header logo with text `Around The U.S.`"
         />
       </header>
@@ -69,7 +68,7 @@
             <fieldset class="popup-box__fieldset">
               <input
                 class="popup-box__input popup-box__input_order_first-input"
-                name="name-input"
+                name="name_input"
                 id="name-input"
                 type="text"
                 placeholder="Enter your name"
@@ -163,8 +162,9 @@
       <li class="places__item">
         <div class="places__img">
           <button type="button" class="places__remove-btn button-modifier">
-            <img src="<%= require('./images/places/remove_btn_svg/trash-btn.svg')%>" />
-            
+            <img
+              src="<%= require('./images/places/remove_btn_svg/trash-btn.svg')%>"
+            />
           </button>
         </div>
         <div class="places__info-wrapper">

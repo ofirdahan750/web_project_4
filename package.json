@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
-    "buildev": "npm run build && npm run dev ",
-    "all": "rimraf node_modules && npm i && npm run buildev"
+    "cleandev": "rimraf node_modules && npm i && npm run dev",
+    "cleanbuild": "rimraf node_modules && npm i && npm run build"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,4 @@
-export const initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
@@ -24,3 +24,21 @@ export const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
+const formValidators = {};
+
+const profileEditBtn = document.querySelector(".profile__edit-btn");
+const profileAddBtn = document.querySelector(".profile__add-btn");
+
+const nameInput = document.querySelector('input[name="name_input"]');
+const aboutMeInput = document.querySelector('input[name="about_me"]');
+
+const cardFormSubmitBtn = document.querySelector('button[name="btn_add-item"]');
+export {
+  cardFormSubmitBtn,
+  aboutMeInput,
+  nameInput,
+  initialCards,
+  profileEditBtn,
+  formValidators,
+  profileAddBtn,
+};

@@ -1,13 +1,10 @@
-import { openPopup } from "./utils.js";
-
-const popupImgSection = document.querySelector(".popup-box_type_img");
-const popupImg = document.querySelector(".popup-box__img");
-const popupImgTitle = document.querySelector(".popup-box__img-title");
 
 export class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name;
-    this._link = data.link;
+  constructor(data, openImgPopup, cardSelector) {
+    const { name, link } = data;
+    this._name = name;
+    this._link = link;
+    this._openImgPopup = openImgPopup;
     this._cardSelector = cardSelector;
   }
   _getTemplate() {
@@ -28,15 +25,10 @@ export class Card {
     e.stopPropagation();
     this._cardItem.remove();
   }
-  _handleImgPopup() {
-    popupImg.src = this._link;
-    popupImg.alt = `a pictrue of ${this._name}`;
-    popupImgTitle.textContent = this._name;
-  }
+
   _setEventListeners() {
-    this._placeImg.addEventListener("click", this._handleImgPopup());
-    this._placeImg.addEventListener("click", () => {
-      openPopup(popupImgSection);
+    this._cardItem.addEventListener("click", () => {
+      this._openImgPopup(this._name, this._link);
     });
     this._placeLikeBtn.addEventListener("click", (e) => {
       this._handleToggleLikedBtn(e);
