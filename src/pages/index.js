@@ -34,28 +34,23 @@ function enableValidation(settings) {
 function openAddProfilePopup() {
   formValidators["form_add-place"].resetValidation();
   AddPopup.open();
-  AddPopup.setEventListeners();
 }
 function openEditProfilePopup() {
   formValidators["form_profile-edit"].resetValidation();
   EditPopup.open();
-  EditPopup.setEventListeners();
   const { nameInfo, aboutMeInfo } = profileUser.getUserInfo();
   nameInput.value = nameInfo;
   aboutMeInput.value = aboutMeInfo;
 }
 function openImgPopup(title, link) {
   newImgPopup.open(title, link);
-  newImgPopup.setEventListeners();
 }
 function handleSubmitAddItem({ title_place: name, img_link: link }) {
   cardsList.addItem(createPlaceItem({ name, link }));
-  AddPopup.removeEventListeners();
 }
 function handleSubmitEditProfile({ name_input, about_me }) {
   formValidators["form_add-place"].resetValidation();
   profileUser.setUserInfo(name_input, about_me);
-  AddPopup.removeEventListeners();
 }
 
 function onInit() {
@@ -70,6 +65,12 @@ function onInit() {
     inputErrorClass: ".popup-box__input_type_error",
     errorClass: ".popup-box__input-error_active",
   });
+  setPopupEvent();
+}
+function setPopupEvent() {
+  EditPopup.setEventListeners()
+  AddPopup.setEventListeners()
+  EditPopup.setEventListeners()
 }
 function renderCard(item) {
   cardsList.addItem(createPlaceItem(item));

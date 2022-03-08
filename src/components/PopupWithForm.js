@@ -18,14 +18,11 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._formSelector.addEventListener("submit", this._handleFormSubmit);
-    this._popupElement.addEventListener("mousedown", this._handleMouseClose);
-    document.addEventListener("contextmenu", this._handleContextMenu);
+    this._formSelector.addEventListener("submit", this._handleFormSubmit);    
   }
 
   removeEventListeners() {
     super.removeEventListeners();
-    document.removeEventListener("contextmenu", this._handleContextMenu);
     this._formSelector.removeEventListener("submit", this._handleFormSubmit);
   }
   _returnInputValObj() {

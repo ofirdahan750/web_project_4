@@ -22,7 +22,6 @@ export default class Popup {
     ) {
       this.close();
     }
-    this._popupElement.removeEventListener("click", this._handleMouseClose);
   };
   _handleEscClose = (e) => {
     if (e.key == "Escape") {
@@ -31,6 +30,8 @@ export default class Popup {
   };
   open() {
     this._popupElement.classList.add("popup-box_visible");
+    document.addEventListener("keydown", this._handleEscClose);
+    document.addEventListener("contextmenu", this._handleContextMenu);
   }
 
   close() {
@@ -39,9 +40,11 @@ export default class Popup {
   }
   removeEventListeners() {
     document.removeEventListener("keydown", this._handleEscClose);
+    document.removeEventListener("contextmenu", this._handleContextMenu);
+
   }
 
   setEventListeners() {
-    document.addEventListener("keydown", this._handleEscClose);
+    this._popupElement.addEventListener("mousedown", this._handleMouseClose);
   }
 }
