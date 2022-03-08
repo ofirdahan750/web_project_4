@@ -47,8 +47,10 @@ Built the use of external directories.
 
 ## Installing
 
-Just run the command on Git CLI "git clone https://github.com/ofirdahan750/web_project_4.git".
-Then run "npm i ; npm run build"
+Just run the command on Git CLI 
+"git clone https://github.com/ofirdahan750/web_project_4.git"
+Then run
+"npm i ; npm run build"
 
 ## Executing program
 Node JS
