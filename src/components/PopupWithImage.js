@@ -21,6 +21,5 @@ export default class PopupWithImage extends Popup {
     this._link = link;
     this._setPopupImg();
     super.open();
-    this._popupElement.addEventListener("mousedown", this._handleMouseClose);
   }
 }

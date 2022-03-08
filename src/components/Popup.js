@@ -31,7 +31,6 @@ export default class Popup {
   open() {
     this._popupElement.classList.add("popup-box_visible");
     document.addEventListener("keydown", this._handleEscClose);
-    document.addEventListener("contextmenu", this._handleContextMenu);
   }
 
   close() {
