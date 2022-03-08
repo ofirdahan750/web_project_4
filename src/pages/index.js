@@ -47,6 +47,7 @@ function openImgPopup(title, link) {
 }
 function handleSubmitAddItem({ title_place: name, img_link: link }) {
   cardsList.addItem(createPlaceItem({ name, link }));
+  AddPopup.close();
 }
 function handleSubmitEditProfile({ name_input, about_me }) {
   formValidators["form_add-place"].resetValidation();
@@ -68,9 +69,9 @@ function onInit() {
   setPopupEvent();
 }
 function setPopupEvent() {
-  EditPopup.setEventListeners()
-  AddPopup.setEventListeners()
-  newImgPopup.setEventListeners()
+  EditPopup.setEventListeners();
+  AddPopup.setEventListeners();
+  newImgPopup.setEventListeners();
 }
 function renderCard(item) {
   cardsList.addItem(createPlaceItem(item));
