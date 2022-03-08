@@ -39,7 +39,6 @@ export default class Popup {
   }
   removeEventListeners() {
     document.removeEventListener("keydown", this._handleEscClose);
-    document.removeEventListener("contextmenu", this._handleContextMenu);
 
   }
 
