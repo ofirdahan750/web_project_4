@@ -70,7 +70,7 @@ function onInit() {
 function setPopupEvent() {
   EditPopup.setEventListeners()
   AddPopup.setEventListeners()
-  EditPopup.setEventListeners()
+  newImgPopup.setEventListeners()
 }
 function renderCard(item) {
   cardsList.addItem(createPlaceItem(item));
