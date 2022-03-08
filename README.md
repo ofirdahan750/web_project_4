@@ -49,11 +49,11 @@ Built the use of external directories.
 Just run the 
 command on Git CLI 
 ```
-`git clone https://github.com/ofirdahan750/web_project_4.git`
+git clone https://github.com/ofirdahan750/web_project_4.git
 ```
 Then run
 ```
-`npm i ; npm run build`
+npm i ; npm run build
 ```
 
 ## Executing program
