@@ -53,7 +53,7 @@ git clone https://github.com/ofirdahan750/web_project_4.git
 ```
 Then run
 ```
-npm i ; npm run build
+npm i ; npm run dev
 ```
 
 ## Executing program
