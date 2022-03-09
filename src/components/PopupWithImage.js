@@ -12,9 +12,6 @@ export default class PopupWithImage extends Popup {
     this._imgElement.src = this._link;
     this._imgElement.alt = `a pictrue of ${this.title}`;
   }
-  setEventListeners() {
-    super.setEventListeners();
-  }
 
   open(title, link) {
     this.title = title;
