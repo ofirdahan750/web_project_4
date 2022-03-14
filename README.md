@@ -69,5 +69,4 @@ The way you'll do this at work is by exporting images directly from Figma — we
 Have fun with JavaScript!
 
 ## Github Link
-(Temporarily unavailable)
 <https://ofirdahan750.github.io/web_project_4/>
