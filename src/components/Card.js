@@ -1,4 +1,3 @@
-
 export class Card {
   constructor(data, handleImageClick, cardSelector) {
     const { name, link } = data;
@@ -24,10 +23,15 @@ export class Card {
   _handleRemoveItem(e) {
     e.stopPropagation();
     this._cardItem.remove();
-    this._cardItem = null; 
+    this._cardItem = null;
   }
 
   _setEventListeners() {
+    if (
+      this._name === "Loading..." &&
+      this._link === "images/spinner_svg.dc4086388e55820fbae1.svg"
+    )
+      return;
     this._cardItem.addEventListener("click", () => {
       this._handleImageClick(this._name, this._link);
     });
