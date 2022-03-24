@@ -36,4 +36,12 @@ export default class Api {
   onRemoveItem(id) {
     return this._onHttpRequest(`cards/${id}`,'DELETE')
   }
+  addItemLike(id) {
+    return this._onHttpRequest(`cards/likes/${id}`,'PUT')
+    
+  }
+  removeItemLike(id) {
+    return this._onHttpRequest(`cards/likes/${id}`,'DELETE')
+
+  }
 }

@@ -4,6 +4,7 @@ export class Card {
     data,
     handleImageClick,
     openRemoveItemPopup,
+    handleLikedToggle,
     cardInfo,
     cardSelector
   ) {
@@ -16,8 +17,9 @@ export class Card {
     this._cardSelector = cardSelector;
     this._likes = likes || [];
     this._isOwner = isOwner || false;
-    this._likedByCurrUser = likedByCurrUser;
+    this._isLikedByCurrUser = likedByCurrUser;
     this._id = _id || getRandomString();
+    this._handleLikedToggle = handleLikedToggle;
   }
   _getTemplate() {
     const placeItemTemplate = document.querySelector(
@@ -31,14 +33,20 @@ export class Card {
   }
   _handleToggleLikedBtn(e) {
     e.stopPropagation();
-    this._placeLikeBtn.classList.toggle("places__like-btn__active");
+    this._isLikedByCurrUser = !this._isLikedByCurrUser;
+    this._isLikedByCurrUser
+      ? this._placeLikeBtn.classList.add("places__like-btn__active")
+      : this._placeLikeBtn.classList.remove("places__like-btn__active");
+
+    this._handleLikedToggle(this._isLikedByCurrUser, this, this._id);
+  }
+  onUpdateLikesAmount(likes) {
+    if (likes) this._likes = likes;
+    this._placeLikeAmount.textContent = this._likes.length;
   }
   _handleRemoveItem(e) {
     e.stopPropagation();
-    // console.log(this._isOwner)
     this._openRemoveItemPopup(this._id, this._cardItem);
-    // this._cardItem.remove();
-    // this._cardItem = null;
   }
 
   _setEventListeners() {
@@ -59,6 +67,9 @@ export class Card {
     this._cardItem = this._getTemplate();
     this._placeImg = this._cardItem.querySelector(".places__img");
     this._placeLikeBtn = this._cardItem.querySelector(".places__like-btn");
+    this._placeLikeAmount = this._cardItem.querySelector(
+      ".places__like-counter"
+    );
     this._placeRemoveBtn = this._cardItem.querySelector(".places__remove-btn");
     if (
       this._name !== "Loading..." &&
@@ -69,15 +80,14 @@ export class Card {
     if (!this._isOwner) {
       this._placeRemoveBtn.remove();
     }
-    if (this._likedByCurrUser) {
+    if (this._isLikedByCurrUser) {
       this._placeLikeBtn.classList.add("places__like-btn__active");
     }
 
     this._placeImg.style.backgroundImage = `url(${this._link})`;
     this._placeImg.alt = `a photo of ${this._name}`;
     this._cardItem.querySelector(".places__name").textContent = `${this._name}`;
-    this._cardItem.querySelector(".places__like-counter").textContent =
-      this._likes.length;
+    this.onUpdateLikesAmount();
     return this._cardItem;
   }
 }

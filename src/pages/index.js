@@ -24,6 +24,7 @@ function createPlaceItem(item, cardInfo) {
     item,
     openImgPopup,
     openRemoveItemPopup,
+    handleLikedToggle,
     cardInfo,
     "#places-item-template"
   );
@@ -89,6 +90,23 @@ function handleSubmitEditProfile({ name_input, about_me }) {
     profileUser.setUserInfo(res);
   });
 }
+function handleLikedToggle(isLiked, item, id) {
+  if (isLiked) {
+    api
+      .addItemLike(id)
+      .then((res) => {
+        item.onUpdateLikesAmount(res.likes);
+      })
+      .catch((err) => console.log("err: " + err));
+  } else {
+    api
+      .removeItemLike(id)
+      .then((res) => {
+        item.onUpdateLikesAmount(res.likes);
+      })
+      .catch((err) => console.log("err: " + err));
+  }
+}
 function setLoadingInit(status, cardItemsArr, userInfo) {
   if (status) {
     profileUser.setUserInfo({
@@ -148,8 +166,6 @@ function setPopupEvent() {
   DeleteConfirmPopup.setEventListeners();
 }
 function renderCard(item, cardInfo) {
-  console.log('cardInfo:', cardInfo)
-  console.log('item:', item)
   cardsList.addItem(createPlaceItem(item, cardInfo));
 }
 
@@ -159,7 +175,7 @@ const cardsList = new Section({
     const id = profileUser.getUserId();
     const cardInfo = {
       isOwner: owner._id === id,
-      likedByCurrUser: likes.find((user) => user._id === id) || false,
+      likedByCurrUser: likes.some((user) => user._id === id),
       likes,
     };
     renderCard(data, cardInfo);
