@@ -9,13 +9,17 @@ export default class UserInfo {
   setUserInfo({ name, about, _id }) {
     this._nameElm.textContent = name;
     this._jobElm.textContent = about;
-    this._userId = _id;
+    this.userId = _id;
   }
   getUserInfo() {
     return {
       nameInfo: this._nameElm.textContent,
       aboutMeInfo: this._jobElm.textContent,
+      
     };
+  }
+  getUserId() {
+    return this.userId
   }
   setPictureProfile(picSrc) {
     this._picElm.src = picSrc;

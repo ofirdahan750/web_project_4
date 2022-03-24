@@ -31,6 +31,9 @@ export default class Api {
     return this._onHttpRequest("users/me", "PATCH",{name,about});
   }
   addNewCard({name,link}) {
-    return this._onHttpRequest('cards','post',{name,link})
+    return this._onHttpRequest('cards','POST',{name,link})
+  }
+  onRemoveItem(id) {
+    return this._onHttpRequest(`cards/${id}`,'DELETE')
   }
 }

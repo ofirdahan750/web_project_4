@@ -129,7 +129,7 @@
               <span class="popup-box__input-error url-input-error"></span>
               <button
                 class="popup-box__submit-button button-modifier"
-                type="submit"
+                type="click"
                 name="btn_add-item"
               >
                 Save
@@ -153,8 +153,28 @@
         </div>
       </div>
     </section>
-    <!-- Loading animation -->
-    <section></section>
+    <!-- Popup Confirm -->
+    <section class="popup-box popup-box_type_confirm">
+      <div class="popup-box__container">
+        <button
+          type="button"
+          class="popup-box__close-button popup-box__close-button_type_delete-confirm button-modifier"
+        ></button>
+        <div class="popup-box__wrapper">
+          <h2 class="popup-box__heading">Are you sure?</h2>
+          <fieldset class="popup-box__fieldset">
+            <button
+              button-modifier
+              class="popup-box__submit-button popup-box__submit-button_type_delete-confirm button-modifier"
+              type="click"
+              name="btn_confirm"
+            >
+              Yes
+            </button>
+          </fieldset>
+        </div>
+      </div>
+    </section>
     <!-- template place -->
     <template id="places-item-template">
       <li class="places__item">
@@ -167,10 +187,13 @@
         </div>
         <div class="places__info-wrapper">
           <h2 class="places__name"></h2>
-          <button
-            type="button"
-            class="places__like-btn button-modifier"
-          ></button>
+          <div>
+            <button
+              type="button"
+              class="places__like-btn button-modifier"
+            ></button>
+            <p class="places__like-counter"></p>
+          </div>
         </div>
       </li>
     </template>
