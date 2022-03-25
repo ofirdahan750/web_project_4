@@ -22,7 +22,11 @@ export class FormValidator {
     });
   }
   _showInputError(inputElement) {
-    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    const txt =
+      inputElement.type === "url"
+        ? `${inputElement.type}-input`
+        : inputElement.id;
+    const errorElement = this._form.querySelector(`.${txt}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
