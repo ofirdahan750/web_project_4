@@ -18,10 +18,21 @@
       </header>
       <main class="main">
         <section class="profile">
-          <img class="profile__avatar" alt="Avatar user photo" />
-
+          <div class="profile__avatar-cover">
+            <!-- <img class="profile__avatar" alt="Avatar user photo" /> -->
+            <button
+              class="profile__avatar-btn button-modifier"
+              alt="Avatar user photo"
+            >
+              <img
+                src="<%= require('./images/profile/profile__pic-edit.svg')%>"
+                alt="Edit profile PIC pencil button"
+                class="profile__avatar-btn-img"
+              />
+            </button>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__name">Jacques Cousteau</h1>
+            <h1 class="profile__name">Loading...</h1>
             <button
               type="button"
               class="profile__edit-btn-cover button-modifier"
@@ -32,7 +43,7 @@
                 alt="Edit profile button"
               />
             </button>
-            <p class="profile__about-me">Explorer</p>
+            <p class="profile__about-me">Loading...</p>
           </div>
           <button type="button" class="profile__add-btn-cover button-modifier">
             <img
@@ -131,9 +142,42 @@
                 class="popup-box__submit-button button-modifier"
                 type="click"
                 name="btn_add-item"
-              >
-                Save
-              </button>
+              ></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Popup Change Profile Pic -->
+    <section class="popup-box popup-box_type_change-profile-pic">
+      <div class="popup-box__container">
+        <button
+          name="change-profile-pic"
+          type="button"
+          class="popup-box__close-button button-modifier"
+        ></button>
+        <div class="popup-box__wrapper">
+          <h2 class="popup-box__heading">Change profile picture</h2>
+          <form
+            name="form_change-profile-pic"
+            class="popup-box__form"
+            novalidate
+          >
+            <fieldset class="popup-box__fieldset">
+              <input
+                class="popup-box__input popup-box__input_order_first-input"
+                id="url-input"
+                name="img_link"
+                type="url"
+                placeholder="Image link"
+                required
+              />
+              <span class="popup-box__input-error url-input-error"></span>
+              <button
+                class="popup-box__submit-button button-modifier"
+                type="click"
+                name="btn_change-profile-pic"
+              ></button>
             </fieldset>
           </form>
         </div>

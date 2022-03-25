@@ -15,7 +15,6 @@ export default class PopupConfirm extends Popup {
   }
   close() {
     super.close();
-
   }
   _handleConfirmSubmit = (e) => {
     e.preventDefault();

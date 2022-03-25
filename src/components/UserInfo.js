@@ -3,7 +3,6 @@ export default class UserInfo {
     this._nameElm = document.querySelector(nameElm);
     this._jobElm = document.querySelector(jobElm);
     this._picElm = document.querySelector(picElm);
-    picElm;
   }
 
   setUserInfo({ name, about, _id }) {
@@ -15,13 +14,12 @@ export default class UserInfo {
     return {
       nameInfo: this._nameElm.textContent,
       aboutMeInfo: this._jobElm.textContent,
-      
     };
   }
   getUserId() {
-    return this.userId
+    return this.userId;
   }
   setPictureProfile(picSrc) {
-    this._picElm.src = picSrc;
+    this._picElm.style.backgroundImage = `url("${picSrc}")`;
   }
 }

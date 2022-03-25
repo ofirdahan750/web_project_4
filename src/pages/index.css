@@ -25,7 +25,10 @@
 
 /* Profile Section*/
 @import url("../blocks/profile/profile.css");
-@import url("../blocks/profile/__img/profile__img.css");
+@import url("../blocks/profile/__avatar/profile__avatar-cover.css");
+@import url("../blocks/profile/__avatar-btn/profile__avatar-btn.css");
+@import url("../blocks/profile/__avatar-btn-img/profile__avatar-btn-img.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
 @import url("../blocks/profile/__info/profile__info.css");
 @import url("../blocks/profile/__name/profile__name.css");
 @import url("../blocks/profile/__edit-btn/profile__edit-btn.css");
@@ -51,6 +54,7 @@
 @import url("../blocks/popup-box/__container/popup-box__container.css");
 @import url("../blocks/popup-box/__close-button/popup-box__close-button.css");
 @import url("../blocks/popup-box/__wrapper/popup-box__wrapper.css");
+
 /* Case of Picture Popup */
 @import url("../blocks/popup-box/__container/_type/_img/popup-box__container_type_img.css");
 @import url("../blocks/popup-box/__close-button/_type/_img/popup-box__close-button_type_img.css");
@@ -70,7 +74,6 @@
 @import url("../blocks/popup-box/__input/_order/_second-input/popup-box__input_order_second-input.css");
 @import url("../blocks/popup-box/__submit-button/popup-box__submit-button.css");
 @import url("../blocks/popup-box/__submit-button/_inactive/popup-box__submit-button_inactive.css");
-
 
 @import url("../blocks/popup-box/__close-button/_type/_delete-confirm/popup-box__close-button_type_delete-confirm.css");
 @import url("../blocks/popup-box/__submit-button/_type/_delete-confirm/popup-box__submit-button_type_delete-confirm.css");

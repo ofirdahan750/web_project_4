@@ -13,7 +13,7 @@ import { getRandomString } from "../utils/utils.js";
 import {
   aboutMeInput,
   nameInput,
-  initialCards,
+  openChangeProfilePopupBtn,
   openEditUserPopupBtn,
   openAddPlacesPopupBtn,
   formValidators,
@@ -44,6 +44,10 @@ function enableValidation(settings) {
   });
 }
 
+function openChangeProfilePopup() {
+  formValidators["form_change-profile-pic"].resetValidation();
+  ChangeProfilePic.open();
+}
 function openAddProfilePopup() {
   formValidators["form_add-place"].resetValidation();
   AddPopup.open();
@@ -61,7 +65,8 @@ function openImgPopup(title, link) {
 function openRemoveItemPopup(id, cardItem) {
   DeleteConfirmPopup.open(id, cardItem);
 }
-function handleSubmitAddItem({ title_place: name, img_link: link }) {
+function handleSubmitAddItem({ title_place: name, img_link: link }, btn) {
+  btn.textContent = "Saving...";
   api
     .addNewCard({
       name,
@@ -74,7 +79,8 @@ function handleSubmitAddItem({ title_place: name, img_link: link }) {
         likes: [],
       };
       renderCard(res, cardInfo);
-    });
+    })
+    .catch((err) => console.log("err: " + err));
 }
 function handleSubmitRemoveConfirm(id, element) {
   api
@@ -84,11 +90,25 @@ function handleSubmitRemoveConfirm(id, element) {
     })
     .catch((err) => console.log("err: " + err));
 }
-function handleSubmitEditProfile({ name_input, about_me }) {
+function handleSubmitEditProfile({ name_input, about_me }, btn) {
   formValidators["form_add-place"].resetValidation();
-  api.setUserInfo({ name: name_input, about: about_me }).then((res) => {
-    profileUser.setUserInfo(res);
-  });
+  btn.textContent = "Saving...";
+
+  api
+    .setUserInfo({ name: name_input, about: about_me })
+    .then((res) => {
+      profileUser.setUserInfo(res);
+    })
+    .catch((err) => console.log("err: " + err));
+}
+function handleSubmitProfilePic({ img_link }, btn) {
+  btn.textContent = "Saving...";
+  api
+    .onUpdateProfilePic({ avatar: img_link })
+    .then(() => {
+      profileUser.setPictureProfile(img_link);
+    })
+    .catch((err) => console.log("err: " + err));
 }
 function handleLikedToggle(isLiked, item, id) {
   if (isLiked) {
@@ -131,8 +151,10 @@ function setLoadingInit(status, cardItemsArr, userInfo) {
       _id: userInfo._id,
     });
     profileUser.setPictureProfile(userInfo.avatar);
-
     cardsList.setNewItemlist(cardItemsArr);
+    openEditUserPopupBtn.addEventListener("click", openEditProfilePopup);
+    openAddPlacesPopupBtn.addEventListener("click", openAddProfilePopup);
+    openChangeProfilePopupBtn.addEventListener("click", openChangeProfilePopup);
   }
 }
 function onInit() {
@@ -141,8 +163,6 @@ function onInit() {
     .getInitInfo()
     .then(([cardItemsArr, userInfo]) => {
       setLoadingInit(false, cardItemsArr, userInfo);
-      openEditUserPopupBtn.addEventListener("click", openEditProfilePopup);
-      openAddPlacesPopupBtn.addEventListener("click", openAddProfilePopup);
       enableValidation({
         formSelector: ".popup-box__form",
         inputSelector: ".popup-box__input",
@@ -164,6 +184,7 @@ function setPopupEvent() {
   AddPopup.setEventListeners();
   NewImgPopup.setEventListeners();
   DeleteConfirmPopup.setEventListeners();
+  ChangeProfilePic.setEventListeners();
 }
 function renderCard(item, cardInfo) {
   cardsList.addItem(createPlaceItem(item, cardInfo));
@@ -175,7 +196,7 @@ const cardsList = new Section({
     const id = profileUser.getUserId();
     const cardInfo = {
       isOwner: owner._id === id,
-      likedByCurrUser: likes.some((user) => user._id === id),
+      likedByCurrUser: likes.find((user) => user._id === id),
       likes,
     };
     renderCard(data, cardInfo);
@@ -184,11 +205,13 @@ const cardsList = new Section({
 });
 const EditPopup = new PopupWithForm(
   ".popup-box_type_profile-edit",
-  handleSubmitEditProfile
+  handleSubmitEditProfile,
+  "Save"
 );
 const AddPopup = new PopupWithForm(
   ".popup-box_type_add-item",
-  handleSubmitAddItem
+  handleSubmitAddItem,
+  "Create"
 );
 const NewImgPopup = new PopupWithImage({
   popupSelector: ".popup-box_type_img",
@@ -203,8 +226,12 @@ const DeleteConfirmPopup = new PopupConfirm({
 const profileUser = new UserInfo({
   nameElm: ".profile__name",
   jobElm: ".profile__about-me",
-  picElm: ".profile__avatar",
+  picElm: ".profile__avatar-cover",
 });
+const ChangeProfilePic = new PopupWithForm(
+  ".popup-box_type_change-profile-pic",
+  handleSubmitProfilePic,
+  "Save"
+);
 const api = new Api(apiConfing);
-
 onInit();

@@ -26,22 +26,23 @@ export default class Api {
   _getInitialCards() {
     return this._onHttpRequest("cards", "GET");
   }
- 
-  setUserInfo({name,about}) {
-    return this._onHttpRequest("users/me", "PATCH",{name,about});
+
+  setUserInfo({ name, about }) {
+    return this._onHttpRequest("users/me", "PATCH", { name, about });
   }
-  addNewCard({name,link}) {
-    return this._onHttpRequest('cards','POST',{name,link})
+  addNewCard({ name, link }) {
+    return this._onHttpRequest("cards", "POST", { name, link });
   }
   onRemoveItem(id) {
-    return this._onHttpRequest(`cards/${id}`,'DELETE')
+    return this._onHttpRequest(`cards/${id}`, "DELETE");
   }
   addItemLike(id) {
-    return this._onHttpRequest(`cards/likes/${id}`,'PUT')
-    
+    return this._onHttpRequest(`cards/likes/${id}`, "PUT");
   }
   removeItemLike(id) {
-    return this._onHttpRequest(`cards/likes/${id}`,'DELETE')
-
+    return this._onHttpRequest(`cards/likes/${id}`, "DELETE");
+  }
+  onUpdateProfilePic({ avatar }) {
+    return this._onHttpRequest("users/me/avatar", "PATCH", { avatar });
   }
 }
