@@ -36,15 +36,13 @@ const openChangeProfilePopupBtn = document.querySelector(
   ".profile__avatar-cover"
 );
 
-const nameInput = document.querySelector('input[name="name_input"]');
-const aboutMeInput = document.querySelector('input[name="about_me"]');
+const txtErr = "Something went wrong, please try again later ";
 
 export {
-  aboutMeInput,
-  nameInput,
   initialCards,
   openEditUserPopupBtn,
   openAddPlacesPopupBtn,
   formValidators,
   openChangeProfilePopupBtn,
+  txtErr,
 };

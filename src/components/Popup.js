@@ -20,6 +20,10 @@ export default class Popup {
     this._popupElement.classList.remove("popup-box_visible");
     document.removeEventListener("keydown", this._handleEscClose);
   }
+  handleLoading(btn, txt = "Saving...", isDone = false) {
+    btn.disabled = !isDone ? true : false;
+    this._elementTextModifying(btn, txt);
+  }
 
   setEventListeners() {
     this._popupElement.addEventListener("mousedown", (e) => {

@@ -21,19 +21,25 @@ export class FormValidator {
       });
     });
   }
-  _showInputError(inputElement) {
+  _getElementTxt(inputElement) {
     const txt =
       inputElement.type === "url"
         ? `${inputElement.type}-input`
         : inputElement.id;
-    const errorElement = this._form.querySelector(`.${txt}-error`);
+    return txt;
+  }
+  _showInputError(inputElement) {
+    const errorElement = this._form.querySelector(
+      `.${this._getElementTxt(inputElement)}-error`
+    );
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
   }
-
   _removeInputError(inputElement) {
-    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._form.querySelector(
+      `.${this._getElementTxt(inputElement)}-error`
+    );
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.textContent = "";
     errorElement.classList.remove(this._errorClass);
@@ -50,10 +56,11 @@ export class FormValidator {
     this._inputList.forEach((inputElement) => {
       this._removeInputError(inputElement);
     });
-    const btnFormElm = this._form.querySelector(".popup-box__submit-button");
-    btnFormElm.disabled = true;
-    btnFormElm.classList.add("popup-box__submit-button_inactive");
+    // const btnFormElm = this._form.querySelector(".popup-box__submit-button");
+    // btnFormElm.disabled = true;
+    // btnFormElm.classList.add("popup-box__submit-button_inactive");
     this._form.reset();
+    this._toggleButtonState();
   }
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
@@ -64,6 +71,7 @@ export class FormValidator {
       this._buttonElement.disabled = false;
     }
   }
+
   _hasInvalidInput() {
     return this._inputList.some((input) => {
       return !input.validity.valid;

@@ -1,12 +1,14 @@
 import Popup from "./Popup";
-
+import { elementTextModifying } from "../utils/utils";
 export default class PopupConfirm extends Popup {
-  constructor({ popupSelector, handleSubmitRemoveConfirm }) {
+  constructor({ popupSelector, handleSubmitRemoveConfirm, initialBtnTxt }) {
     super(popupSelector);
     this._handleSubmitRemoveConfirm = handleSubmitRemoveConfirm;
     this._submitBtnElement = this._popupElement.querySelector(
       ".popup-box__submit-button"
     );
+    this._initialBtnTxt = initialBtnTxt;
+    this._elementTextModifying = elementTextModifying;
   }
   open(id, element) {
     super.open();
@@ -16,10 +18,15 @@ export default class PopupConfirm extends Popup {
   close() {
     super.close();
   }
+
   _handleConfirmSubmit = (e) => {
     e.preventDefault();
-    this._handleSubmitRemoveConfirm(this._id, this._element);
-    this.close();
+    this._handleSubmitRemoveConfirm(
+      this._id,
+      this._element,
+      this._submitBtnElement,
+      this._initialBtnTxt
+    );
   };
 
   setEventListeners() {

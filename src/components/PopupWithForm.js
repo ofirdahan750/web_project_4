@@ -1,4 +1,5 @@
 import Popup from "./Popup.js";
+import { elementTextModifying } from "../utils/utils";
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleSubmitFrom, btnText) {
@@ -12,12 +13,16 @@ export default class PopupWithForm extends Popup {
     this._inputList = [
       ...this._formElement.querySelectorAll(".popup-box__input"),
     ];
+    this._elementTextModifying = elementTextModifying;
   }
 
   _handleFormSubmit = (e) => {
     e.preventDefault();
-    this._handleSubmitFrom(this._returnInputValObj(), this._formBtn);
-    this.close();
+    this._handleSubmitFrom(
+      this._returnInputValObj(),
+      this._formBtn,
+      this._btnText
+    );
   };
 
   _returnInputValObj() {
@@ -28,7 +33,6 @@ export default class PopupWithForm extends Popup {
     return valInputObj;
   }
   open() {
-    this._formBtn.textContent = this._btnText;
     super.open();
   }
   close() {

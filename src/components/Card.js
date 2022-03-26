@@ -17,7 +17,7 @@ export class Card {
     this._cardSelector = cardSelector;
     this._likes = likes || [];
     this._isOwner = isOwner || false;
-    this._isLikedByCurrUser = likedByCurrUser;
+    this._isLikedByCurrUser = likedByCurrUser || false;
     this._id = _id || getRandomString();
     this._handleLikedToggle = handleLikedToggle;
   }
@@ -33,15 +33,15 @@ export class Card {
   }
   _handleToggleLikedBtn(e) {
     e.stopPropagation();
-    this._isLikedByCurrUser = !this._isLikedByCurrUser;
-    this._isLikedByCurrUser
-      ? this._placeLikeBtn.classList.add("places__like-btn__active")
-      : this._placeLikeBtn.classList.remove("places__like-btn__active");
-
     this._handleLikedToggle(this._isLikedByCurrUser, this, this._id);
   }
-  onUpdateLikesAmount(likes) {
-    if (likes) this._likes = likes;
+  onUpdateLikesAmount(likes = []) {
+    this._likes = likes;
+    console.log('this._likes:', this._likes)
+    this._isLikedByCurrUser
+      ? this._placeLikeBtn.classList.remove("places__like-btn__active")
+      : this._placeLikeBtn.classList.add("places__like-btn__active");
+    this._isLikedByCurrUser = !this._isLikedByCurrUser;
     this._placeLikeAmount.textContent = this._likes.length;
   }
   _handleRemoveItem(e) {
@@ -87,7 +87,7 @@ export class Card {
     this._placeImg.style.backgroundImage = `url(${this._link})`;
     this._placeImg.alt = `a photo of ${this._name}`;
     this._cardItem.querySelector(".places__name").textContent = `${this._name}`;
-    this.onUpdateLikesAmount();
+    this._placeLikeAmount.textContent = this._likes.length;
     return this._cardItem;
   }
 }

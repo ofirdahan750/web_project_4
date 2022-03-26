@@ -15,5 +15,10 @@ function getRandomString(length = getRandomInt()) {
 function getRandomInt(min = 100, max = 150) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-export { getRandomString };
+function elementTextModifying(element, txt = "Saving...") {
+  element.textContent = txt;
+}
+function runFuncTimeOut(func, time) {
+  setTimeout(func, time);
+}
+export { getRandomString, elementTextModifying, runFuncTimeOut };
