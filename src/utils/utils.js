@@ -10,6 +10,7 @@ function getRandomString(length = getRandomInt()) {
   for (let i = 0; i < length; i++) {
     str += chars[Math.floor(Math.random() * chars.length)];
   }
+  str += Date.now();
   return str + Date.now();
 }
 function getRandomInt(min = 100, max = 150) {
