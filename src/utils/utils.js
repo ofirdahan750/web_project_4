@@ -10,15 +10,13 @@ function getRandomString(length = getRandomInt()) {
   for (let i = 0; i < length; i++) {
     str += chars[Math.floor(Math.random() * chars.length)];
   }
-  return str;
+  return str + Date.now();
 }
 function getRandomInt(min = 100, max = 150) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function elementTextModifying(element, txt = "Saving...") {
+function modifyElementText(element, txt = "Saving...") {
   element.textContent = txt;
 }
-function runFuncTimeOut(func, time) {
-  setTimeout(func, time);
-}
-export { getRandomString, elementTextModifying, runFuncTimeOut };
+
+export { getRandomString, modifyElementText };

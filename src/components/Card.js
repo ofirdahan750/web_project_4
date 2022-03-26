@@ -1,25 +1,25 @@
 import { getRandomString } from "../utils/utils.js";
 export class Card {
   constructor(
-    data,
+    { name, link, _id, owner },
     handleImageClick,
     openRemoveItemPopup,
     handleLikedToggle,
-    cardInfo,
+    getUserId,
+    { likes, isOwner },
     cardSelector
   ) {
-    const { name, link, _id } = data;
-    const { likes, isOwner, likedByCurrUser } = cardInfo;
     this._name = name;
     this._link = link;
     this._handleImageClick = handleImageClick;
+    this._getUserId = getUserId;
     this._openRemoveItemPopup = openRemoveItemPopup;
     this._cardSelector = cardSelector;
     this._likes = likes || [];
     this._isOwner = isOwner || false;
-    this._isLikedByCurrUser = likedByCurrUser || false;
     this._id = _id || getRandomString();
     this._handleLikedToggle = handleLikedToggle;
+    this._owner = owner;
   }
   _getTemplate() {
     const placeItemTemplate = document.querySelector(
@@ -33,17 +33,9 @@ export class Card {
   }
   _handleToggleLikedBtn(e) {
     e.stopPropagation();
-    this._handleLikedToggle(this._isLikedByCurrUser, this, this._id);
+    this._handleLikedToggle(this._isLiked, this, this._id);
   }
-  onUpdateLikesAmount(likes = []) {
-    this._likes = likes;
-    console.log('this._likes:', this._likes)
-    this._isLikedByCurrUser
-      ? this._placeLikeBtn.classList.remove("places__like-btn__active")
-      : this._placeLikeBtn.classList.add("places__like-btn__active");
-    this._isLikedByCurrUser = !this._isLikedByCurrUser;
-    this._placeLikeAmount.textContent = this._likes.length;
-  }
+
   _handleRemoveItem(e) {
     e.stopPropagation();
     this._openRemoveItemPopup(this._id, this._cardItem);
@@ -62,7 +54,21 @@ export class Card {
         this._handleRemoveItem(e);
       });
   }
-
+  _renderLikes = () => {
+    this._placeLikeAmount.textContent = this._likes.length;
+    this._isLiked
+      ? this._placeLikeBtn.classList.add("places__like-btn__active")
+      : this._placeLikeBtn.classList.remove("places__like-btn__active");
+  };
+  onUpdateLikes = (likes = [], isInit) => {
+    if (!isInit && this._likes !== []) this._likes = likes;
+    this._isLikedByCurrUser();
+    this._renderLikes();
+  };
+  _isLikedByCurrUser = () => {
+    const id = this._getUserId();
+    this._isLiked = this._likes.find((like) => like._id === id) || false;
+  };
   generateCard() {
     this._cardItem = this._getTemplate();
     this._placeImg = this._cardItem.querySelector(".places__img");
@@ -71,6 +77,7 @@ export class Card {
       ".places__like-counter"
     );
     this._placeRemoveBtn = this._cardItem.querySelector(".places__remove-btn");
+    this.onUpdateLikes([], true);
     if (
       this._name !== "Loading..." &&
       this._link !== "images/spinner_svg.dc4086388e55820fbae1.svg"
@@ -80,14 +87,10 @@ export class Card {
     if (!this._isOwner) {
       this._placeRemoveBtn.remove();
     }
-    if (this._isLikedByCurrUser) {
-      this._placeLikeBtn.classList.add("places__like-btn__active");
-    }
 
     this._placeImg.style.backgroundImage = `url(${this._link})`;
     this._placeImg.alt = `a photo of ${this._name}`;
     this._cardItem.querySelector(".places__name").textContent = `${this._name}`;
-    this._placeLikeAmount.textContent = this._likes.length;
     return this._cardItem;
   }
 }

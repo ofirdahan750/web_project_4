@@ -8,11 +8,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../utils/Api.js";
 import spinnerGif from "../images/profile/spinner_svg.svg";
-import {
-  getRandomString,
-  runFuncTimeOut,
-  elementTextModifying,
-} from "../utils/utils.js";
+import { getRandomString } from "../utils/utils.js";
 
 import {
   openChangeProfilePopupBtn,
@@ -26,12 +22,20 @@ import PopupConfirm from "../components/PopupConfirm";
 const nameInput = document.querySelector('input[name="name_input"]');
 const aboutMeInput = document.querySelector('input[name="about_me"]');
 
+const initialBtnTxt = {
+  editPopup: "Save",
+  addPopup: "Create",
+  deleteConfirmPopup: "Yes",
+  changeProfilePicPopup: "Save",
+};
+
 function createPlaceItem(item, cardInfo) {
   const newCard = new Card(
     item,
     openImgPopup,
     openRemoveItemPopup,
     handleLikedToggle,
+    getUserId,
     cardInfo,
     "#places-item-template"
   );
@@ -73,86 +77,87 @@ function openImgPopup(title, link) {
 function openRemoveItemPopup(id, cardItem) {
   deleteConfirmPopup.open(id, cardItem);
 }
+function getUserId() {
+  return profileUser.getUserId();
+}
 
-function handleSubmitAddItem(
-  { title_place: name, img_link: link },
-  btn,
-  initialBtnTxt
-) {
-  addPopup.handleLoading(btn);
+function handleSubmitAddItem({ title_place: name, img_link: link }) {
+  addPopup.handleLoading();
   api
     .addNewCard({
       name,
       link,
     })
     .then((res) => {
-      addPopup.handleLoading(btn, "Place added successfully!");
+      addPopup.handleLoading("Place added successfully!");
       const cardInfo = {
         isOwner: true,
-        likedByOwner: false,
         likes: [],
       };
       renderCard(res, cardInfo);
-      runFuncTimeOut(() => {
+      setTimeout(() => {
         addPopup.close();
       }, 1000);
     })
     .catch((err) => {
-      addPopup.handleLoading(btn, txtErr);
+      addPopup.handleLoading(txtErr);
       console.log(`Error: ${err}`);
     })
     .finally(() => {
-      runFuncTimeOut(() => {
-        addPopup.handleLoading(btn, initialBtnTxt, true);
+      setTimeout(() => {
+        addPopup.handleLoading(initialBtnTxt.addPopup, true);
       }, 1800);
     });
 }
-function handleSubmitRemoveConfirm(id, element, btn, initialBtnTxt) {
-  deleteConfirmPopup.handleLoading(btn);
+function handleSubmitRemoveConfirm(id, item) {
+  deleteConfirmPopup.handleLoading();
   api
     .onRemoveItem(id)
     .then(() => {
-      deleteConfirmPopup.handleLoading(btn, "Place removed successfully!");
-      element.remove();
-      runFuncTimeOut(() => {
+      deleteConfirmPopup.handleLoading("Place removed successfully!");
+      item.remove();
+      setTimeout(() => {
         deleteConfirmPopup.close();
       }, 1000);
     })
     .catch((err) => {
-      deleteConfirmPopup.handleLoading(btn, txtErr);
+      deleteConfirmPopup.handleLoading(txtErr);
       console.log(`Error: ${err}`);
     })
     .finally(() => {
-      runFuncTimeOut(() => {
-        deleteConfirmPopup.handleLoading(btn, initialBtnTxt, true);
+      setTimeout(() => {
+        deleteConfirmPopup.handleLoading(
+          initialBtnTxt.deleteConfirmPopup,
+          true
+        );
       }, 1050);
     });
 }
-function handleSubmitEditProfile({ name_input, about_me }, btn, initialBtnTxt) {
+function handleSubmitEditProfile({ name_input, about_me }) {
   formValidators["form_add-place"].resetValidation();
-  editPopup.handleLoading(btn);
+  editPopup.handleLoading();
 
   api
-    .setUserInfo({ name: name_input, about: about_me }, btn, initialBtnTxt)
+    .setUserInfo({ name: name_input, about: about_me })
     .then((res) => {
-      editPopup.handleLoading(btn, "Profile edited successfully!");
+      editPopup.handleLoading("Profile edited successfully!");
       profileUser.setUserInfo(res);
-      runFuncTimeOut(() => {
+      setTimeout(() => {
         editPopup.close();
       }, 1000);
     })
     .catch((err) => {
-      editPopup.handleLoading(btn, txtErr);
+      editPopup.handleLoading(txtErr);
       console.log(`Error: ${err}`);
     })
     .finally(() => {
-      runFuncTimeOut(() => {
-        editPopup.handleLoading(btn, initialBtnTxt);
+      setTimeout(() => {
+        editPopup.handleLoading(initialBtnTxt.editPopup, true);
       }, 1800);
     });
 }
-function handleSubmitProfilePic({ img_link }, btn, initialBtnTxt) {
-  changeProfilePicPopup.handleLoading(btn);
+function handleSubmitProfilePic({ img_link }) {
+  changeProfilePicPopup.handleLoading();
 
   api
     .onUpdateProfilePic({ avatar: img_link })
@@ -162,18 +167,21 @@ function handleSubmitProfilePic({ img_link }, btn, initialBtnTxt) {
         "Profile Picture modified successfully!"
       );
       profileUser.setPictureProfile(img_link);
-      runFuncTimeOut(() => {
+      setTimeout(() => {
         changeProfilePicPopup.close();
       }, 1000);
     })
     .catch((err) => {
-      changeProfilePicPopup.handleLoading(btn, txtErr);
+      changeProfilePicPopup.handleLoading(txtErr);
       console.log(`Error: ${err}`);
     })
 
     .finally(() => {
-      runFuncTimeOut(() => {
-        changeProfilePicPopup.handleLoading(btn, initialBtnTxt, false);
+      setTimeout(() => {
+        changeProfilePicPopup.handleLoading(
+          initialBtnTxt.changeProfilePicPopup,
+          true
+        );
       }, 1000);
     });
 }
@@ -182,14 +190,14 @@ function handleLikedToggle(isLiked, item, id) {
     api
       .addItemLike(id)
       .then((res) => {
-        item.onUpdateLikesAmount(res.likes);
+        item.onUpdateLikes(res.likes);
       })
       .catch((err) => console.log(`Error: ${err}`));
   } else {
     api
       .removeItemLike(id)
       .then((res) => {
-        item.onUpdateLikesAmount(res.likes);
+        item.onUpdateLikes(res.likes);
       })
       .catch((err) => console.log(`Error: ${err}`));
   }
@@ -257,10 +265,9 @@ function renderCard(item, cardInfo) {
 const cardsList = new Section({
   renderer: (data) => {
     const { owner, likes } = data;
-    const id = profileUser.getUserId();
+    const id = getUserId();
     const cardInfo = {
       isOwner: owner._id === id,
-      likedByCurrUser: likes.find((user) => user._id === id),
       likes,
     };
     renderCard(data, cardInfo);
@@ -272,10 +279,10 @@ const editPopup = new PopupWithForm(
   handleSubmitEditProfile,
   "Save"
 );
+
 const addPopup = new PopupWithForm(
   ".popup-box_type_add-item",
-  handleSubmitAddItem,
-  "Create"
+  handleSubmitAddItem
 );
 const newImgPopup = new PopupWithImage({
   popupSelector: ".popup-box_type_img",
@@ -286,7 +293,6 @@ const newImgPopup = new PopupWithImage({
 const deleteConfirmPopup = new PopupConfirm({
   popupSelector: ".popup-box_type_confirm",
   handleSubmitRemoveConfirm,
-  initialBtnTxt: "Yes",
 });
 const profileUser = new UserInfo({
   nameElm: ".profile__name",
@@ -295,8 +301,7 @@ const profileUser = new UserInfo({
 });
 const changeProfilePicPopup = new PopupWithForm(
   ".popup-box_type_change-profile-pic",
-  handleSubmitProfilePic,
-  "Save"
+  handleSubmitProfilePic
 );
 const api = new Api(apiConfing);
 onInit();

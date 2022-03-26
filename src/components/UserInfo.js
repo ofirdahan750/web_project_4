@@ -8,7 +8,7 @@ export default class UserInfo {
   setUserInfo({ name, about, _id }) {
     this._nameElm.textContent = name;
     this._jobElm.textContent = about;
-    this.userId = _id;
+    this._userId = _id;
   }
   getUserInfo() {
     return {
@@ -17,7 +17,7 @@ export default class UserInfo {
     };
   }
   getUserId() {
-    return this.userId;
+    return this._userId;
   }
   setPictureProfile(picSrc) {
     this._picElm.style.backgroundImage = `url("${picSrc}")`;
