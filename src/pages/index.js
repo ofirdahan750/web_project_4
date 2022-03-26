@@ -158,12 +158,10 @@ function handleSubmitEditProfile({ name_input, about_me }) {
 }
 function handleSubmitProfilePic({ img_link }) {
   changeProfilePicPopup.handleLoading();
-
   api
     .onUpdateProfilePic({ avatar: img_link })
     .then(() => {
       changeProfilePicPopup.handleLoading(
-        btn,
         "Profile Picture modified successfully!"
       );
       profileUser.setPictureProfile(img_link);
