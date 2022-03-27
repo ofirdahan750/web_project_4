@@ -33,7 +33,7 @@ module.exports = {
         // all files must be processed by babel-loader
         loader: "babel-loader",
         // exclude the node_modules folder, we don't need to process files in it
-        exclude: ["/node_modules/","/confing.js"],
+        exclude: ["/node_modules/","/confing\.js"],
       },
       {
         test: /\.css$/,
