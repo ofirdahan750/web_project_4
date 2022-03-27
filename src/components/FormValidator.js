@@ -56,9 +56,6 @@ export class FormValidator {
     this._inputList.forEach((inputElement) => {
       this._removeInputError(inputElement);
     });
-    // const btnFormElm = this._form.querySelector(".popup-box__submit-button");
-    // btnFormElm.disabled = true;
-    // btnFormElm.classList.add("popup-box__submit-button_inactive");
     this._form.reset();
     this._toggleButtonState();
   }

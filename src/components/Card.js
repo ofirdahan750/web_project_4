@@ -20,6 +20,11 @@ export class Card {
     this._id = _id || getRandomString();
     this._handleLikedToggle = handleLikedToggle;
     this._owner = owner;
+    this._isLiked = () => {
+      if (!this._likes.length) return;
+      const id = this._getUserId();
+      return this._likes.some((like) => like._id === id) || false;
+    };
   }
   _getTemplate() {
     const placeItemTemplate = document.querySelector(
@@ -33,7 +38,7 @@ export class Card {
   }
   _handleToggleLikedBtn(e) {
     e.stopPropagation();
-    this._handleLikedToggle(this._isLiked, this, this._id);
+    this._handleLikedToggle(this._isLiked(), this, this._id);
   }
 
   _handleRemoveItem(e) {
@@ -56,19 +61,17 @@ export class Card {
   }
   _renderLikes = () => {
     this._placeLikeAmount.textContent = this._likes.length;
-    this._isLiked
-      ? this._placeLikeBtn.classList.add("places__like-btn__active")
-      : this._placeLikeBtn.classList.remove("places__like-btn__active");
+    if (this._isLiked()) {
+      this._placeLikeBtn.classList.add("places__like-btn__active");
+    } else {
+      this._placeLikeBtn.classList.remove("places__like-btn__active");
+    }
   };
-  onUpdateLikes = (likes = [], isInit) => {
-    if (!isInit && this._likes !== []) this._likes = likes;
-    this._isLikedByCurrUser();
+  onUpdateLikes = (likes = []) => {
+    this._likes = likes;
     this._renderLikes();
   };
-  _isLikedByCurrUser = () => {
-    const id = this._getUserId();
-    this._isLiked = this._likes.find((like) => like._id === id) || false;
-  };
+
   generateCard() {
     this._cardItem = this._getTemplate();
     this._placeImg = this._cardItem.querySelector(".places__img");
@@ -77,7 +80,7 @@ export class Card {
       ".places__like-counter"
     );
     this._placeRemoveBtn = this._cardItem.querySelector(".places__remove-btn");
-    this.onUpdateLikes([], true);
+    this._renderLikes();
     if (
       this._name !== "Loading..." &&
       this._link !== "images/spinner_svg.dc4086388e55820fbae1.svg"
